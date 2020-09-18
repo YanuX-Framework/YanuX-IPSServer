@@ -131,8 +131,8 @@ terminado==0.8.3
 testpath==0.4.4
 tf-estimator-nightly==2.3.0.dev2020062301
 threadpoolctl==2.1.0
-tornado==4.3
-traitlets==5.0.0
+tornado==6.0.4
+traitlets==4.3.3
 treq==20.4.1
 Twisted==20.3.0
 txaio==20.4.1
