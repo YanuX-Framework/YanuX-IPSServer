@@ -6,9 +6,9 @@ RUN python -V
 ADD ./requirements.txt /tmp/requirements.txt
 
 RUN ls
-RUN which -a pip
 RUN conda install pip
 RUN conda install setuptools
+RUN which -a pip
 # Install dependencies
 RUN /opt/conda/bin/pip install -qr /tmp/requirements.txt
 
