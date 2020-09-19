@@ -6,6 +6,8 @@ RUN python -V
 ADD ./requirements.txt /tmp/requirements.txt
 
 RUN ls
+RUN print('UPDATING PYTHON)
+RUN conda update python
 RUN conda install pip
 RUN conda install setuptools
 RUN which -a pip
