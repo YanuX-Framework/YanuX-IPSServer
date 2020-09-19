@@ -10,7 +10,7 @@ RUN which -a pip
 RUN conda install pip
 RUN conda install setuptools
 # Install dependencies
-RUN python -m pip install -qr /tmp/requirements.txt
+RUN /opt/conda/bin/pip install -qr /tmp/requirements.txt
 
 # Add our code
 ADD ./indoorlocationapp /opt/indoorlocationapp/
