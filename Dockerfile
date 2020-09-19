@@ -5,10 +5,11 @@ RUN python -V
 # Grab requirements.txt.
 ADD ./requirements.txt /tmp/requirements.txt
 
+RUN ls
 RUN conda install pip
 RUN conda install setuptools
 # Install dependencies
-RUN conda install --upgrade -qr /tmp/requirements.txt
+RUN conda/v install --upgrade -qr /tmp/requirements.txt
 
 # Add our code
 ADD ./indoorlocationapp /opt/indoorlocationapp/
