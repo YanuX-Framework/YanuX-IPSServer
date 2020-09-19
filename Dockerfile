@@ -1,4 +1,4 @@
-FROM heroku/heroku:18
+FROM heroku/miniconda3
 
 RUN conda install python-snappy
 RUN python -V
