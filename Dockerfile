@@ -10,8 +10,8 @@ RUN conda update python
 RUN conda install pip
 RUN conda install setuptools
 RUN which -a pip
+
 # Install dependencies
-RUN /opt/conda/bin/pip install psycopg2-binary
 RUN /opt/conda/bin/pip install -qr /tmp/requirements.txt
 
 # Add our code
