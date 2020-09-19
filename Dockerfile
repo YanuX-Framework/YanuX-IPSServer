@@ -1,4 +1,4 @@
-FROM heroku/miniconda
+FROM heroku/heroku:18
 
 RUN conda install python-snappy
 RUN pip install --upgrade pip
