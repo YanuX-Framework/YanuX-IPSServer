@@ -6,6 +6,7 @@ RUN python -V
 ADD ./requirements.txt /tmp/requirements.txt
 
 RUN ls
+RUN conda install libpq-dev
 RUN conda update python
 RUN conda install pip
 RUN conda install setuptools
