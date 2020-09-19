@@ -1,6 +1,7 @@
 FROM heroku/miniconda:3
 
 RUN ls
+RUN conda search python
 RUN conda update python
 RUN python -V
 RUN conda install python-snappy
