@@ -1,8 +1,8 @@
 FROM heroku/miniconda
 
 RUN conda install python-snappy
-Run pip install --upgrade pip
-Run pip install --upgrade setuptools
+RUN pip install --upgrade pip
+RUN pip install --upgrade setuptools
 # Grab requirements.txt.
 ADD ./requirements.txt /tmp/requirements.txt
 
