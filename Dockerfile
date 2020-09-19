@@ -1,8 +1,7 @@
 FROM heroku/heroku:18
 
 RUN conda install python-snappy
-RUN pip install --upgrade pip
-RUN conda install setuptools
+RUN python -V
 # Grab requirements.txt.
 ADD ./requirements.txt /tmp/requirements.txt
 
