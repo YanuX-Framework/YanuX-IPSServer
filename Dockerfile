@@ -1,6 +1,7 @@
 FROM heroku/miniconda:3
 
 RUN conda install python-snappy
+RUN conda install psycopg2
 RUN python -V
 # Grab requirements.txt.
 ADD ./requirements.txt /tmp/requirements.txt
