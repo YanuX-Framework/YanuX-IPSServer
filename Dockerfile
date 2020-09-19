@@ -8,7 +8,7 @@ ADD ./requirements.txt /tmp/requirements.txt
 RUN pip install --upgrade pip
 RUN conda install setuptools
 # Install dependencies
-RUN pip install -qr /tmp/requirements.txt
+RUN pip install --update -qr /tmp/requirements.txt
 
 # Add our code
 ADD ./indoorlocationapp /opt/indoorlocationapp/
