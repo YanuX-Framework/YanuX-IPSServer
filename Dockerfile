@@ -5,6 +5,8 @@ RUN python -V
 # Grab requirements.txt.
 ADD ./requirements.txt /tmp/requirements.txt
 
+RUN pip install --upgrade pip
+RUN pip install --upgrade setuptools
 # Install dependencies
 RUN pip install -qr /tmp/requirements.txt
 
