@@ -6,7 +6,7 @@ RUN python -V
 ADD ./requirements.txt /tmp/requirements.txt
 
 RUN pip install --upgrade pip
-RUN conda install --upgrade setuptools
+RUN conda install setuptools
 # Install dependencies
 RUN pip install -qr /tmp/requirements.txt
 
