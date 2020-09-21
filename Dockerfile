@@ -11,7 +11,7 @@ RUN pip install --upgrade pip
 RUN which -a pip
 RUN conda install setuptools
 RUN python -V
-RUN pip install whitenoise
+RUN conda install gunicorn
 # Grab requirements.txt.
 ADD ./requirements.txt /tmp/requirements.txt
 
