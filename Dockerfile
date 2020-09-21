@@ -15,7 +15,7 @@ RUN conda install setuptools
 ADD ./requirements.txt /tmp/requirements.txt
 
 # Install dependencies
-RUN /opt/conda/bin/pip install -qr /tmp/requirements.txt --ignore-installed six
+RUN /opt/conda/bin/pip install -qr /tmp/requirements.txt
 
 # Add our code
 ADD ./indoorlocationapp /opt/indoorlocationapp/
