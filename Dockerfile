@@ -21,4 +21,4 @@ RUN pip install -qr /tmp/requirements.txt
 ADD . /opt/indoorlocationapp/
 WORKDIR /opt/indoorlocationapp
 
-CMD gunicorn --bind 0.0.0.0:$PORT wsgi
+CMD gunicorn --bind 0.0.0.0:$PORT Server.wsgi
