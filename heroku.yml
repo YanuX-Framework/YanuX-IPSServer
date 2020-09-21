@@ -2,4 +2,4 @@ build:
   docker:
     web: Dockerfile
 run:
-    gunicorn --bind 0.0.0.0:$PORT Server.wsgi
+    web: gunicorn --bind 0.0.0.0:$PORT Server.wsgi
