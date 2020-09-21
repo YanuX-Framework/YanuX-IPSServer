@@ -1,17 +1,16 @@
 FROM heroku/miniconda:3
 
 RUN ls
-RUN conda search python
 RUN conda update python
 RUN python -V
 RUN conda install python-snappy
 RUN conda install psycopg2
 RUN conda install wheel
 RUN conda install pip
-RUN pip install --upgrade pip --ignore-installed six,pycparser
+RUN pip install --upgrade pip
 RUN which -a pip
 RUN conda install setuptools
-
+RUN python -V
 # Grab requirements.txt.
 ADD ./requirements.txt /tmp/requirements.txt
 
