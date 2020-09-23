@@ -1,11 +1,10 @@
 FROM heroku/miniconda:3
 
-RUN conda update python
+RUN conda install -c anaconda python=3.7.4
 RUN conda install python-snappy
 RUN conda install psycopg2
 RUN pip install --upgrade pip
 RUN pip install setuptools --upgrade
-RUN pip install wheel
 RUN conda install setuptools
 RUN conda install six
 RUN conda install pyasn1
