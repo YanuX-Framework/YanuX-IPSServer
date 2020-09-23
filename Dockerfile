@@ -12,12 +12,11 @@ RUN conda install pyasn1
 RUN conda install psutil
 RUN conda install pycparser
 RUN conda install setproctitle
-RUN conda install lmdb
 # Grab requirements.txt.
 ADD ./requirements.txt /tmp/requirements.txt
 
 # Install dependencies
-RUN /opt/conda/pip install -r /tmp/requirements.txt
+RUN pip install -r /tmp/requirements.txt
 
 # Add our code
 ADD . /opt/indoorlocationapp/
