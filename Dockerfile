@@ -6,9 +6,9 @@ RUN conda install psycopg2
 RUN pip install --upgrade pip
 RUN which -a pip
 RUN conda install setuptools
-RUN conda install gunicorn
 RUN conda install six
 RUN conda install pyasn1
+RUN conda install psutil
 # Grab requirements.txt.
 ADD ./requirements.txt /tmp/requirements.txt
 
