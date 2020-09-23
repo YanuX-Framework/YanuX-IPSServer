@@ -29,3 +29,5 @@ WORKDIR /opt/indoorlocationapp
 
 # Run app
 CMD gunicorn --bind 0.0.0.0:$PORT Server.wsgi
+
+CMD crossbar start
