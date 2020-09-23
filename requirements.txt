@@ -117,7 +117,6 @@ scipy==1.5.2
 sdnotify==0.3.2
 Send2Trash==1.5.0
 service-identity==18.1.0
-setproctitle==1.1.10
 sortedcontainers==2.2.2
 sqlparse==0.3.1
 tensorboard==2.3.0
@@ -148,5 +147,4 @@ whitenoise==5.2.0
 widgetsnbextension==3.5.1
 wrapt==1.12.1
 zipp==3.1.0
-zlmdb==20.8.1
 zope.interface==5.1.0

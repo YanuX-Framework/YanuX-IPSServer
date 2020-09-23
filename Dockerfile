@@ -10,7 +10,7 @@ RUN conda install six
 RUN conda install pyasn1
 RUN conda install psutil
 RUN conda install pycparser
-RUN conda install lmdb
+
 # Grab requirements.txt.
 ADD ./requirements.txt /tmp/requirements.txt
 
