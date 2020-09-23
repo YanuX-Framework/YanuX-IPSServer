@@ -1,2 +1,1 @@
-web: crossbar start
-web: gunicorn Server.wsgi
+web: crossbar start & gunicorn Server.wsgi & waint -n
