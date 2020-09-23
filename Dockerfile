@@ -13,7 +13,7 @@ RUN conda install pyasn1
 ADD ./requirements.txt /tmp/requirements.txt
 
 # Install dependencies
-RUN pip install -qr /tmp/requirements.txt
+RUN pip install -r /tmp/requirements.txt
 
 # Add our code
 ADD . /opt/indoorlocationapp/
