@@ -9,6 +9,7 @@ RUN conda install setuptools
 RUN conda install six
 RUN conda install pyasn1
 RUN conda install psutil
+RUN conda install pycparser
 # Grab requirements.txt.
 ADD ./requirements.txt /tmp/requirements.txt
 
