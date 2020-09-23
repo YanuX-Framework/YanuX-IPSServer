@@ -4,7 +4,7 @@ RUN conda update python
 RUN conda install python-snappy
 RUN conda install psycopg2
 RUN pip install --upgrade pip
-RUN which -a pip
+RUN pip install setuptools --upgrade
 RUN pip install wheel
 RUN conda install setuptools
 RUN conda install six
