@@ -33,6 +33,5 @@ CMD gunicorn --bind 0.0.0.0:$PORT Server.wsgi
 
 # Run crossbar start
 CMD crossbar start
-
 #If doens't work this way, try launching with procfile and git
 
