@@ -17,7 +17,7 @@ RUN conda install lmdb
 ADD ./requirements.txt /tmp/requirements.txt
 
 # Install dependencies
-RUN pip install -r /tmp/requirements.txt
+RUN /opt/conda/pip install -r /tmp/requirements.txt
 
 # Add our code
 ADD . /opt/indoorlocationapp/
