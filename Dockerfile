@@ -8,6 +8,7 @@ RUN python -V
 
 #Install required packages and update existing
 RUN conda install python-snappy
+RUN conda install setuptools
 RUN conda install psycopg2
 RUN pip install --upgrade pip
 RUN pip install setuptools --upgrade
