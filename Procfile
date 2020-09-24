@@ -1,1 +1,1 @@
-web: gunicorn --bind 0.0.0.0:$PORT Server.wsgi --log-level debug & crossbar start & wait -n
+web: gunicorn Server.wsgi & crossbar start & wait -n
