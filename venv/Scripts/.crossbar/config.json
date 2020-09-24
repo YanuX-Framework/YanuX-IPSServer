@@ -4,6 +4,9 @@
     "workers": [
         {
             "type": "router",
+            "options": {
+             "pythonpath": [".."]
+          },
             "realms": [
                 {
                     "name": "realm1",
@@ -20,10 +23,9 @@
                                         "subscribe": true
                                     },
                                     "disclose": {
-                                        "caller": true,
+                                        "caller": false,
                                         "publisher": true
-                                    },
-                                    "cache": true
+                                    }
                                 }
                             ]
                         }
@@ -31,6 +33,18 @@
                 }
             ],
             "transports": [
+                {
+                    "type": "rawsocket",
+                    "endpoint": {
+                        "type": "tcp",
+                        "port": 8081,
+                        "backlog": 1024
+                    },
+                    "options": {
+                        "max_message_size": 1048576
+                    },
+                    "serializers": ["cbor", "msgpack", "json"]
+                },
                 {
                     "type": "web",
                     "endpoint": {
@@ -46,7 +60,7 @@
                             "type": "websocket"
                             },
                         "notify": {
-                             "type": "pusher",
+                             "type": "publisher",
                              "realm": "realm1",
                              "role": "anonymous"
                           }
