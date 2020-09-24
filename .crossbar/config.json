@@ -27,7 +27,22 @@
         }
       ],
       "transports": [
-
+        {
+          "type": "rawsocket",
+          "endpoint": {
+            "type": "tcp",
+            "port": 8081,
+            "backlog": 1024
+          },
+          "options": {
+            "max_message_size": 1048576
+          },
+          "serializers": [
+            "cbor",
+            "msgpack",
+            "json"
+          ]
+        },
         {
           "type": "web",
           "endpoint": {
