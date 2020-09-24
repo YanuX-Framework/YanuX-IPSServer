@@ -16,7 +16,7 @@ def publish(username,position):
     print('Publishing new message')
     payload = {'username': username,'position':position}
     print('Retrieving Port stated by heroku')
-    requests.post("https://indoorlocationapp.herokuapp.com/notify",
+    requests.post("http://indoorlocationapp.herokuapp.com/notify",
                   json={
                       'topic': 'onLocationUpdate',
                       'args': [payload]
