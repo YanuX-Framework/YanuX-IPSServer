@@ -32,25 +32,6 @@
             ],
             "transports": [
                 {
-                    "type": "rawsocket",
-                    "endpoint": {
-                        "type": "tcp",
-                        "port": 9000,
-                        "backlog": 1024
-                    },
-                    "options": {
-                        "max_message_size": 1048576
-                    },
-                    "serializers": ["cbor", "msgpack", "json"],
-                    "paths": {
-                        "notify": {
-                             "type": "publisher",
-                             "realm": "realm1",
-                             "role": "anonymous"
-                          }
-                    }
-             },
-                {
                     "type": "web",
                     "endpoint": {
                        "type": "tcp",
@@ -69,7 +50,14 @@
                             "serializers": [
                                 "cbor", "msgpack", "json"
                             ]
-                            }
+                            },
+                        "paths": {
+                        "notify": {
+                             "type": "publisher",
+                             "realm": "realm1",
+                             "role": "anonymous"
+                          }
+                    }
                     }
                 }
             ]

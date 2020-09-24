@@ -13,8 +13,12 @@ import os
 
 
 def publish(username,position):
+    print('Publishing new message')
     payload = {'username': username,'position':position}
-    requests.post("http://127.0.0.1:9000/notify",
+    print('Retrieving Port stated by heroku')
+    port = str(os.environ.get("PORT"))
+    print('Heroku post: ' + port)
+    requests.post("http://127.0.0.1:"+port+"/notify",
                   json={
                       'topic': 'onLocationUpdate',
                       'args': [payload]
