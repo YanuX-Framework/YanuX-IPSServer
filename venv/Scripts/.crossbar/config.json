@@ -36,7 +36,14 @@
                 "endpoint": {
                    "type": "tcp",
                    "port": 9000
-                }
+                },
+                    "paths": {
+                        "notify": {
+                             "type": "publisher",
+                             "realm": "realm1",
+                             "role": "anonymous"
+                          }
+                    }
              },
                 {
                     "type": "web",
@@ -57,12 +64,7 @@
                             "serializers": [
                                 "cbor", "msgpack", "json"
                             ]
-                            },
-                        "notify": {
-                             "type": "publisher",
-                             "realm": "realm1",
-                             "role": "anonymous"
-                          }
+                            }
                     }
                 }
             ]
