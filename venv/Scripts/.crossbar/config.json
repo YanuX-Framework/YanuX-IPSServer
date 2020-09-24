@@ -32,7 +32,7 @@
             ],
             "transports": [
                  {
-                "type": "websocket",
+                "type": "web",
                 "endpoint": {
                    "type": "tcp",
                    "port": 9000
