@@ -35,7 +35,7 @@
           "type": "web",
           "endpoint": {
             "type": "tcp",
-            "port": 9055
+            "port": "$PORT"
           },
           "paths": {
             "/": {
@@ -46,19 +46,6 @@
               "type": "publisher",
               "realm": "realm1",
               "role": "anonymous"
-            }
-          }
-        },
-        {
-          "type": "web",
-          "endpoint": {
-            "type": "tcp",
-            "port": "$PORT"
-          },
-          "paths": {
-            "/": {
-              "type": "static",
-              "directory": "../web"
             },
             "ws": {
               "type": "websocket"
