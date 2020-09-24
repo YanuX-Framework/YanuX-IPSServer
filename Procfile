@@ -1,1 +1,1 @@
-web: crossbar start & gunicorn Server.wsgi & wait -n
+web: crossbar start

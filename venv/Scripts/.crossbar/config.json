@@ -1,6 +1,4 @@
 {
-    "$schema": "https://raw.githubusercontent.com/crossbario/crossbar/master/crossbar.json",
-    "version": 2,
     "controller": {
     },
     "workers": [
@@ -33,24 +31,18 @@
                 }
             ],
             "transports": [
-                {
-                    "type": "websocket",
-                    "endpoint": {
-                        "type": "tcp",
-                        "port": 9000,
-                        "backlog": 1024
-                    },
-                    "options": {
-                        "max_message_size": 1048576
-                    },
-                    "serializers": ["cbor", "msgpack", "json"]
-                },
+               {
+                "type": "websocket",
+                "endpoint": {
+                   "type": "tcp",
+                   "port": 9000
+                }
+             },
                 {
                     "type": "web",
                     "endpoint": {
-                        "type": "tcp",
-                        "port": "$PORT",
-                        "backlog": 1024
+                       "type": "tcp",
+                       "port": "$PORT"
                     },
                     "paths": {
                         "/": {
@@ -64,43 +56,13 @@
                             "type": "websocket",
                             "serializers": [
                                 "cbor", "msgpack", "json"
-                            ],
-                            "options": {
-                                "allowed_origins": ["*"],
-                                "allow_null_origin": true,
-                                "enable_webstatus": false,
-                                "max_frame_size": 1048576,
-                                "max_message_size": 1048576,
-                                "auto_fragment_size": 65536,
-                                "fail_by_drop": true,
-                                "open_handshake_timeout": 2500,
-                                "close_handshake_timeout": 1000,
-                                "auto_ping_interval": 10000,
-                                "auto_ping_timeout": 5000,
-                                "auto_ping_size": 4,
-                                "compression": {
-                                    "deflate": {
-                                        "request_no_context_takeover": false,
-                                        "request_max_window_bits": 13,
-                                        "no_context_takeover": false,
-                                        "max_window_bits": 13,
-                                        "memory_level": 5
-                                    }
-                                }
-                            }
-                        },
+                            ]
+                            },
                         "notify": {
                              "type": "publisher",
                              "realm": "realm1",
                              "role": "anonymous"
-                          },
-                        "info": {
-                            "type": "nodeinfo"
-                        },
-                        "static": {
-                             "type": "static",
-                             "directory": "../static"
-                            }
+                          }
                     }
                 }
             ]
