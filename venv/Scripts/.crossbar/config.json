@@ -32,6 +32,13 @@
             ],
             "transports": [
                 {
+                "type": "web",
+                "endpoint": {
+                   "type": "tcp",
+                   "port": 9000
+                }
+             },
+                {
                     "type": "web",
                     "endpoint": {
                        "type": "tcp",
