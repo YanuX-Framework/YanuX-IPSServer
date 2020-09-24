@@ -51,13 +51,11 @@
                                 "cbor", "msgpack", "json"
                             ]
                             },
-                        "paths": {
                         "notify": {
                              "type": "publisher",
                              "realm": "realm1",
                              "role": "anonymous"
                           }
-                    }
                     }
                 }
             ]
