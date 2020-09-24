@@ -1,72 +1,71 @@
 {
-    "controller": {
-    },
-    "workers": [
+  "controller": {
+  },
+  "workers": [
+    {
+      "type": "router",
+      "options": {
+        "pythonpath": [
+          ".."
+        ]
+      },
+      "realms": [
         {
-            "type": "router",
-            "options": {
-             "pythonpath": [".."]
-          },
-            "realms": [
+          "name": "realm1",
+          "roles": [
+            {
+              "name": "anonymous",
+              "permissions": [
                 {
-                    "name": "realm1",
-                    "roles": [
-                        {
-                            "name": "anonymous",
-                            "permissions": [
-                                {
-                                    "uri": "*",
-                                    "allow": {
-                                        "call": true,
-                                        "register": true,
-                                        "publish": true,
-                                        "subscribe": true
-                                    },
-                                    "disclose": {
-                                        "caller": false,
-                                        "publisher": true
-                                    }
-                                }
-                            ]
-                        }
-                    ]
+                  "uri": "*",
+                  "allow": {
+                    "call": true,
+                    "register": true,
+                    "publish": true,
+                    "subscribe": true
+                  }
                 }
-            ],
-            "transports": [
-                {
-                    "type": "rawsocket",
-                    "endpoint": {
-                        "type": "tcp",
-                        "port": 8081,
-                        "backlog": 1024
-                    },
-                    "options": {
-                        "max_message_size": 1048576
-                    },
-                    "serializers": ["cbor", "msgpack", "json"]
-                },
-                {
-                    "type": "web",
-                    "endpoint": {
-                       "type": "tcp",
-                       "port": "$PORT"
-                    },
-                    "paths": {
-                        "/": {
-                            "type": "static",
-                            "directory": "../web"
-                        },
-                        "ws": {
-                            "type": "websocket"
-                            },
-                        "notify": {
-                             "type": "publisher",
-                             "realm": "realm1",
-                             "role": "anonymous"
-                          }
-                    }
-                }
-            ]
+              ]
+            }
+          ]
         }
-    ]
+      ],
+      "transports": [
+        {
+          "type": "web",
+          "endpoint": {
+            "type": "tcp",
+            "port": 9055
+          },
+          "paths": {
+            "/": {
+              "type": "static",
+              "directory": "../web"
+            },
+            "notify": {
+              "type": "publisher",
+              "realm": "realm1",
+              "role": "anonymous"
+            }
+          }
+        },
+        {
+          "type": "web",
+          "endpoint": {
+            "type": "tcp",
+            "port": "$PORT"
+          },
+          "paths": {
+            "/": {
+              "type": "static",
+              "directory": "../web"
+            },
+            "ws": {
+              "type": "websocket"
+            }
+          }
+        }
+      ]
+    }
+  ]
 }
