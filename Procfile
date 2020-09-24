@@ -1,1 +1,1 @@
-web: crossbar start & gunicorn Server.wsgi --bind 0.0.0.0:$PORT & wait -n
+web: crossbar start & gunicorn Server.wsgi & wait -n
