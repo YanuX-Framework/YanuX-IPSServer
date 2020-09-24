@@ -5,7 +5,8 @@ import os
 def publish(username,position):
     print('Publishing new message')
     payload = {'username': username,'position':position}
-    response = requests.post("http://127.0.0.1/notify",
+    print('HERE WE ARE ')
+    response = requests.post("https://indoorlocationapp.herokuapp.com//notify",
                   json={
                       'topic': 'onLocationUpdate',
                       'args': [payload]

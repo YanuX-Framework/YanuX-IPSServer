@@ -27,6 +27,7 @@
         }
       ],
       "transports": [
+
         {
           "type": "web",
           "endpoint": {
@@ -36,7 +37,7 @@
           "paths": {
             "/": {
               "type": "static",
-              "directory": "../web"
+              "directory": ".."
             },
             "notify": {
               "type": "publisher",
