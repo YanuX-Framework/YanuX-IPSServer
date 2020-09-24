@@ -22,3 +22,4 @@ def publish(username,position):
                       'args': [payload]
                   })
     print(str(response))
+    return 200
