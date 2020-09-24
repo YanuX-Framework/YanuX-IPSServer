@@ -6,7 +6,7 @@ from sklearn.preprocessing import OneHotEncoder,LabelEncoder
 from .algorithms import *
 from . import auxiliarFunctions as aux
 
-dataset = pd.read_csv('Notebooks/PROXIMITY/dataset_train_university.csv')
+dataset = pd.read_csv('/app/Notebooks/PROXIMITY/dataset_train_university.csv')
 label_encoder = LabelEncoder()
 train_X_rssi = None
 train_X_rolling_mean = None
