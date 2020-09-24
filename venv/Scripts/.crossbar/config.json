@@ -14,13 +14,13 @@
                                 {
                                     "uri": "*",
                                     "allow": {
-                                        "call": false,
-                                        "register": false,
+                                        "call": true,
+                                        "register": true,
                                         "publish": true,
                                         "subscribe": true
                                     },
                                     "disclose": {
-                                        "caller": false,
+                                        "caller": true,
                                         "publisher": true
                                     },
                                     "cache": true
@@ -46,7 +46,7 @@
                             "type": "websocket"
                             },
                         "notify": {
-                             "type": "publisher",
+                             "type": "pusher",
                              "realm": "realm1",
                              "role": "anonymous"
                           }
