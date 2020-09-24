@@ -41,7 +41,6 @@
                         "/": {
                             "type": "static",
                             "directory": "../web"
-                            }
                         },
                         "ws": {
                             "type": "websocket"
