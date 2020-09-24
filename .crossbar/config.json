@@ -5,11 +5,6 @@
   "workers": [
     {
       "type": "router",
-      "options": {
-        "pythonpath": [
-          ".."
-        ]
-      },
       "realms": [
         {
           "name": "realm1",
@@ -32,13 +27,6 @@
         }
       ],
       "transports": [
-         {
-                "type": "websocket",
-                "endpoint": {
-                   "type": "tcp",
-                   "port": 9000
-                }
-             },
         {
           "type": "web",
           "endpoint": {
