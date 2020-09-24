@@ -31,35 +31,6 @@
                 }
             ],
             "transports": [
-                 {
-                "type": "web",
-                "endpoint": {
-                   "type": "tcp",
-                   "port": 9000
-                },
-                     "paths": {
-                         "/": {
-                             "type": "static",
-                             "directory": "../web",
-                             "options": {
-                                 "enable_directory_listing": true
-                             }
-                         },
-                         "ws": {
-                             "type": "websocket",
-                             "serializers": [
-                                 "cbor",
-                                 "msgpack",
-                                 "json"
-                             ]
-                         },
-                         "notify": {
-                             "type": "publisher",
-                             "realm": "realm1",
-                             "role": "anonymous"
-                         }
-                     }
-             },
                 {
                     "type": "web",
                     "endpoint": {
