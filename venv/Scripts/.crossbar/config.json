@@ -40,16 +40,11 @@
                     "paths": {
                         "/": {
                             "type": "static",
-                            "directory": "../web",
-                            "options": {
-                                "enable_directory_listing": true
+                            "directory": "../web"
                             }
                         },
                         "ws": {
-                            "type": "websocket",
-                            "serializers": [
-                                "cbor", "msgpack", "json"
-                            ]
+                            "type": "websocket"
                             },
                         "notify": {
                              "type": "publisher",
