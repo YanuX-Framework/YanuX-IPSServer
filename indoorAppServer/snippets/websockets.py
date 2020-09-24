@@ -12,3 +12,4 @@ def publish(username,position):
                       'topic': 'onLocationUpdate',
                       'args': [payload]
                   })
+    print(response.elapsed.total_seconds())
