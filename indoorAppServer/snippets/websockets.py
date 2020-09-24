@@ -4,7 +4,7 @@ import requests
 def publish(username,position):
     print('Publishing new message')
     payload = {'username': username,'position':position}
-    response = requests.post("http://127.0.0.1:9055/notify",
+    response = requests.post("http://localhost:9055/notify",
                   json={
                       'topic': 'onLocationUpdate',
                       'args': [payload]
