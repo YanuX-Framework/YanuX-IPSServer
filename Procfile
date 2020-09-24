@@ -1,1 +1,1 @@
-web: crossbar start & gunicorn Server.wsgi & wait -n --log-level debug
+web: crossbar start & gunicorn Server.wsgi --log-level debug & wait -n
