@@ -16,7 +16,12 @@ def publish(username,position):
     print('Publishing new message')
     payload = {'username': username,'position':position}
     print('Retrieving Port stated by heroku')
-    port = str(os.environ.get("PORT"))
+
+    ON_HEROKU = os.environ.get('ON_HEROKU')
+    if ON_HEROKU:
+        port = str(os.environ.get("PORT",9000))
+    else:
+        port = 8080
     print('Heroku post: ' + port)
     requests.post("http://127.0.0.1:"+port+"/notify",
                   json={
