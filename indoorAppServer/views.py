@@ -151,9 +151,6 @@ class ScanningView(APIView):
 
     def apply_proximity(self, matching_radio_map, radio_map_is_classifier):
         # FOR TEST ONLY
-        radio_map_is_classifier = True
-        matching_radio_map[
-            'dataset'] = 'D:/College/5th Year College/TESE/Desenvolvimento/Code/Application/findLocationApp/findLocation/Server/Notebooks/PROXIMITY/dataset_train_university.csv'
         sample = {}
 
         # Sort beacons by number of samples recorded
@@ -175,11 +172,6 @@ class ScanningView(APIView):
                 matching_radio_map['dataset'], test_df)
 
     def apply_trilateration(self, matching_radio_map, radio_map_is_classifier, beacons_known_locations):
-        # FOR TEST ONLY
-        radio_map_is_classifier = True
-        matching_radio_map[
-            'dataset'] = 'D:/College/5th Year College/TESE/Desenvolvimento/Code/Application/findLocationApp/findLocation/Server/Notebooks/PROXIMITY/dataset_train_university.csv'
-
         # Trilateration with LSE variables
         min_distance = float('inf')
         closest_location = None
@@ -295,7 +287,7 @@ HELPER FUNCTIONS FOR MAIN FLOW
 
 
 def load_access_points_locations():
-    with open('access_points_location.json') as json_file:
+    with open('/app/access_points_location.json') as json_file:
         data = json.load(json_file)
         access_points = {}
         for k, v in data.items():
