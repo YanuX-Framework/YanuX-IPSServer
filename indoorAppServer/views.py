@@ -228,7 +228,7 @@ class ScanningView(APIView):
     def structure_position_results(self):
         position_dict = {}
         if self.position_regression is not None:
-            position_dict['Regression'] = self.position_regression
+            position_dict['Regression'] = (self.position_regression[0][0],self.position_regression[0][1])
         if self.position_classification is not None:
             position_dict['Classification'] = self.position_classification
         return position_dict
