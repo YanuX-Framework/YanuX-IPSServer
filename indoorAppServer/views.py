@@ -126,7 +126,7 @@ class ScanningView(APIView):
             if beacon in self.beacons_structured:
                 available_beacons[beacon] = position
         result_dict['beacons_known_positions'] = available_beacons
-        result_dict['beacons_locations_length'] = len(beacons_known_positions)
+        result_dict['beacons_locations_length'] = len(available_beacons)
         return result_dict
 
     def apply_ml_algorithm(self, position_technique, radio_map_is_classifier,
