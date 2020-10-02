@@ -26,7 +26,7 @@ print('Initializing Django Server...')
 fuzzy_dict = initializationModule.create_and_assert_fuzzy_system()
 fuzzy_system = fuzzy_dict['System']
 fuzzy_technique = fuzzy_dict['Technique MF']
-initializationModule.test_ws_communication()
+#initializationModule.test_ws_communication()
 trained_radio_maps = initializationModule.train_existent_radio_maps()
 proximityPositioning.structure_dataset()
 print('Server initialization finished with code 0.')

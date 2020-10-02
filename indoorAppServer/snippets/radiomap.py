@@ -45,6 +45,7 @@ def train_algorithms(x_train, dataset, radio_map, trained_radio_maps, columns):
 
 
 def train_each_radio_map():
+    global feature_importance
     trained_radio_maps = dict()
     for radio_map in radio_maps_heroku:
         dataset = pd.read_csv(radio_map)
@@ -151,7 +152,6 @@ def compute_matching_data(access_points_scanned, beacons_scanned):
         # than the threshold
         matching_list_aps = list()
         matching_list_beacons = list()
-        feature_imp = feature_importance[radio_map]
         for beacon in beacons_scanned:
             if beacon in beacons_df_columns and beacon in feature_importance[radio_map]:
                 matching_list_beacons.append(beacon)
