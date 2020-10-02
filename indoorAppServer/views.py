@@ -90,7 +90,22 @@ class ScanningView(APIView):
     beacons_structured = list()
     beacons_ml_fingerprinting = {}
 
+    def clear_cache(self):
+        self.username = None
+        self.deviceUuid = None
+        self.accessPointsDetected = None
+        self.beaconsDetected = None
+        self.deviceSensorDetected = None
+        self.position_regression = None
+        self.position_classification = None
+        self.access_points_ml = {}
+        self.beacons_ml = {}
+        self.access_points_structured = list()
+        self.beacons_structured = list()
+        self.beacons_ml_fingerprinting = {}
+
     def configure_data_structures(self, sample_dict):
+        self.clear_cache()
         self.username = sample_dict['username']
         self.deviceUuid = sample_dict['uuid']
         self.accessPointsDetected = sample_dict['mAccessPoints']
