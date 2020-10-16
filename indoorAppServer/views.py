@@ -116,8 +116,11 @@ class ScanningView(APIView):
         self.deviceUuid = sample_dict['uuid']
         self.accessPointsDetected = sample_dict['mAccessPoints']
         self.beaconsDetected = sample_dict['mBeaconsList']
-        self.deviceSensorDetected = sample_dict['mSensorInformationList'][0]
-        self.orientation = math.degrees(self.deviceSensorDetected['x_value'])
+        self.deviceSensorDetected = sample_dict['mSensorInformationList']
+        if len(self.deviceSensorDetected) != 0:
+            self.orientation = math.degrees(self.deviceSensorDetected['x_value'])
+        else:
+            self.orientation = 0
         self.structure_access_points_data()
         self.structure_beacons_data()
 
