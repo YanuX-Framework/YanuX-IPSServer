@@ -31,13 +31,13 @@
           "type": "web",
           "endpoint": {
             "type": "tcp",
-            "port": "$PORT"
+            "port": 8080
           },
           "paths": {
             "/": {
               "type": "wsgi",
-            "module": "Server.wsgi",
-            "object": "application"
+              "module": "Server.wsgi",
+              "object": "application"
             },
             "notify": {
               "type": "publisher",
@@ -47,16 +47,16 @@
             "ws": {
               "type": "websocket",
               "auth": {
-                                "ticket": {
-                                    "type": "static",
-                                    "principals": {
-                                        "client1": {
-                                            "ticket": "secretticket",
-                                            "role": "trusted"
-                                        }
-                                    }
-                                }
-                            }
+                "ticket": {
+                  "type": "static",
+                  "principals": {
+                    "client1": {
+                      "ticket": "secretticket",
+                      "role": "trusted"
+                    }
+                  }
+                }
+              }
             }
           }
         }
