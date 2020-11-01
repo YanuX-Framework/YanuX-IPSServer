@@ -10,7 +10,7 @@
           "name": "realm1",
           "roles": [
             {
-              "name": "anonymous",
+              "name": "trusted",
               "permissions": [
                 {
                   "uri": "*",
@@ -45,7 +45,18 @@
               "role": "anonymous"
             },
             "ws": {
-              "type": "websocket"
+              "type": "websocket",
+              "auth": {
+                                "ticket": {
+                                    "type": "static",
+                                    "principals": {
+                                        "client1": {
+                                            "ticket": "secretticket",
+                                            "role": "trusted"
+                                        }
+                                    }
+                                }
+                            }
             }
           }
         }
