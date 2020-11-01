@@ -95,8 +95,8 @@ def decode(prediction):
 
 def load_access_points_locations():
     locations_local = glob.glob(
-        '*.json')
-    locations_heroku = glob.glob('/app/*.json')
+        'locations/*.json')
+    locations_heroku = glob.glob('/app/locations/*.json')
     location_dict = {}
     for location in locations_heroku:
         with open(location) as json_file:

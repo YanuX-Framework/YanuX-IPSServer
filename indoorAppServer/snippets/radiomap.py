@@ -6,8 +6,8 @@ from operator import itemgetter
 from ..snippets import algorithms, common
 
 radio_maps_local = glob.glob(
-    'D:/College/5th Year College/TESE\Desenvolvimento/Code\Application/findLocationApp/findLocation/Server/Notebooks/FINGERPRINT/radiomap*.csv')
-radio_maps_heroku = glob.glob('/app/Notebooks/FINGERPRINT/radiomap*.csv')
+    'D:/College/5th Year College/TESE\Desenvolvimento/Code\Application/IPS/Server/datasets/Fingerprinting/radiomap*.csv')
+radio_maps_heroku = glob.glob('/app/datasets/Fingerprinting/radiomap*.csv')
 feature_importance = {}
 trained_data = {}
 label_encoders = {}
