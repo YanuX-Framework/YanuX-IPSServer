@@ -370,6 +370,7 @@ class ScanningView(APIView):
         print('DECISION MADE. TECHNIQUE IS ' + position_technique)
 
         if position_technique == 'None':
+            websockets.publish(self.username, self.deviceUuid, None, self.orientation)
             return Response(status=status.HTTP_404_NOT_FOUND)
         else:
             # Apply ML algorithm
