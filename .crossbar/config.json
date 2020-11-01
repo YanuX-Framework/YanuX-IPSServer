@@ -42,7 +42,7 @@
             "notify": {
               "type": "publisher",
               "realm": "realm1",
-              "role": "anonymous"
+              "role": "trusted"
             },
             "ws": {
               "type": "websocket",
