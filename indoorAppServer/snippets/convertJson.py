@@ -48,7 +48,7 @@ def jsonToFile(type):
         list_json_fingerprints.append(dictionary_fingerprint)
     dict_fingerprints = {'fingerprints': list_json_fingerprints}
     try:
-        with open('datasets/Fingerprinting/radiomap' +type +'test.csv', 'w') as csvfile:
+        with open('/app/datasets/Fingerprinting/radiomap' +type +'test.csv', 'w') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
             writer.writeheader()
             for data in list_json_fingerprints:
