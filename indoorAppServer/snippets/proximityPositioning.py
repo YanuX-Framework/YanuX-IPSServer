@@ -14,6 +14,7 @@ INITIALIZATION FOR SCANNING PHASE
 '''
 trained_dataset = {}
 encoder = None
+experimentEncoder = None
 
 '''
 INITIALIZATION FOR EXPERIMENTAL PHASES
@@ -127,12 +128,15 @@ def initialize_training_data(training_dataframe):
 
 def data_cleaning(dataset, flag):
     # DATA CLEANING
+    global experimentEncoder
     common.compute_data_cleaning(dataset, 'rssi_Value')
     common.compute_data_cleaning(dataset, 'rolling_mean_rssi')
     categorical_zone = dataset[['zone']]
     print("Previous Categorical Data")
     display(categorical_zone)
-    zone_changed = common.compute_encoder(categorical_zone, flag)['labels']
+    labels = common.compute_encoder(categorical_zone,0)
+    zone_changed = labels['labels']
+    experimentEncoder = labels['encoder']
     print("After One Hot Encoder")
     dataset['labels'] = zone_changed
 
@@ -148,7 +152,6 @@ def prepare_dataset(test_datadf):
     display(dataset)
     # DATA CLEANING
     data_cleaning(dataset, 0)
-    data_cleaning(test_datadf, 0)
     train_Y = dataset['labels'].values.reshape(-1, 1)
     display(train_Y)
     initialize_training_data(dataset)
@@ -176,13 +179,13 @@ def prepare_dataset_trilateration(test_datadf):
 def apply_knn_classifier(test_data_df):
     global train_Y
     global combination_features_X
+    global experimentEncoder
     global test_combination_features_X
     prepare_dataset(test_data_df)
 
-    train_Y = common.compute_encoder_experiment(train_Y).values.reshape(-1, 1)
     trainX_data = combination_features_X
     testX_data = test_combination_features_X
-    result = compute_KNN_with_Classification(trainX_data=trainX_data, trainY_data=train_Y,
+    result = compute_KNN_with_Classification(trainX_data=trainX_data, trainY_data=train_Y.ravel(),
                                              testX_data=testX_data,
                                              scaler=StandardScaler(),
                                              n_neighbors=12, weights='uniform', algorithm='auto',
@@ -190,9 +193,9 @@ def apply_knn_classifier(test_data_df):
     if len(result) > 1:
         counts = np.bincount(result)
         result[0] = np.argmax(counts)
-        prediction = common.decode(result)
+        prediction = experimentEncoder.inverse_transform(result)
         print("PREDICTION: ", prediction[0])
-    return prediction
+    return prediction[0]
 
 
 def apply_knn_regressor(test_data_df):
