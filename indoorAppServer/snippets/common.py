@@ -81,6 +81,10 @@ def compute_encoder(categorical_data, flag):
     return_dict['encoder'] = label_encoder_priv
     return return_dict
 
+def compute_encoder_experiment(categorical_data):
+    global label_encoder
+    labels = label_encoder.fit_transform(categorical_data)
+    return labels
 
 def compute_data_cleaning(dataset, feature):
     nan_filler = dataset[feature].min() * 1.010

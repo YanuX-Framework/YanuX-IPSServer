@@ -174,12 +174,15 @@ def prepare_dataset_trilateration(test_datadf):
 
 
 def apply_knn_classifier(test_data_df):
+    global train_Y
     global combination_features_X
     global test_combination_features_X
-    prepare_dataset(test_data_df)  # initialized dataset including training set and testing set
+    prepare_dataset(test_data_df)
+
+    train_Y = common.compute_encoder_experiment(train_Y).values.reshape(-1, 1)
     trainX_data = combination_features_X
     testX_data = test_combination_features_X
-    result = compute_KNN_with_Classification(trainX_data=trainX_data, trainY_data=train_Y.ravel(),
+    result = compute_KNN_with_Classification(trainX_data=trainX_data, trainY_data=train_Y,
                                              testX_data=testX_data,
                                              scaler=StandardScaler(),
                                              n_neighbors=12, weights='uniform', algorithm='auto',
