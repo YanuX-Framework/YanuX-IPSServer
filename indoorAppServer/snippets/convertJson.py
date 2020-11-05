@@ -28,16 +28,16 @@ def jsonToFile(type):
         for r in devices_list:
             if type == 'Wi-Fi':
                 match_fingerprint = WiFiSensor.objects.all().filter(name=r['name'],
-                                                                fingerprint_id=fingerprint['id']).values('name', 'rssi')
+                                                                    fingerprint_id=fingerprint['id']).values('name', 'rssi')
             elif type == 'Bluetooth':
                 match_fingerprint = BluetoothSensor.objects.all().filter(name=r['name'],
-                                                                    fingerprint_id=fingerprint['id']).values('name',
-                                                                                                             'rssi')
+                                                                         fingerprint_id=fingerprint['id']).values('name',
+                                                                                                                  'rssi')
             else:
                 match_fingerprint_wifi = WiFiSensor.objects.all().filter(name=r['name'],
-                                                                fingerprint_id=fingerprint['id']).values('name', 'rssi')
+                                                                         fingerprint_id=fingerprint['id']).values('name', 'rssi')
                 match_fingerprint_ble = BluetoothSensor.objects.all().filter(name=r['name'],
-                                                                         fingerprint_id=fingerprint['id']).values('name','rssi')
+                                                                             fingerprint_id=fingerprint['id']).values('name','rssi')
                 match_fingerprint = list(chain(match_fingerprint_wifi, match_fingerprint_ble))
 
             if len(match_fingerprint) == 0:
@@ -55,5 +55,7 @@ def jsonToFile(type):
                 writer.writerow(data)
     except IOError:
         print("I/O error")
-    with open('datasets/Fingerprinting/radiomap' +type +'test.json', 'w') as outfile:
+    '''
+    #with open('datasets/Fingerprinting/radiomap' +type +'test.json', 'w') as outfile:
         json.dump(dict_fingerprints, outfile, cls=DjangoJSONEncoder, indent=3)
+        '''
