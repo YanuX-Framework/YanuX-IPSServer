@@ -55,5 +55,5 @@ def jsonToFile(type):
                 writer.writerow(data)
     except IOError:
         print("I/O error")
-    with open('datasets/Fingerprinting/radiomap' +type +'classifier_university_dataset.json', 'w') as outfile:
+    with open('/app/datasets/Fingerprinting/radiomap' +type +'classifier_university_dataset.json', 'w') as outfile:
         json.dump(dict_fingerprints, outfile, cls=DjangoJSONEncoder, indent=3)
