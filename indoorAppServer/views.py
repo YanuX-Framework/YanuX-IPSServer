@@ -613,7 +613,7 @@ def compute_Response(prediction, isClassifier, serializer_context):
             serialized = FingerprintSerializer(fingerprint, context=serializer_context)
             return Response(serialized.data, status=status.HTTP_200_OK)
         else:
-            fingerprint = Fingerprint.objects.create(coordinate_X=prediction[0][0], coordinate_Y=prediction[0][1])
+            fingerprint = Fingerprint.objects.create(coordinate_X=prediction[0][0], coordinate_Y=prediction[1][0])
             print(fingerprint)
             print(prediction)
             serialized = FingerprintSerializer(fingerprint, context=serializer_context)
