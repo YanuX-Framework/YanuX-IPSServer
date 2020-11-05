@@ -48,12 +48,12 @@ def jsonToFile(type):
         list_json_fingerprints.append(dictionary_fingerprint)
     dict_fingerprints = {'fingerprints': list_json_fingerprints}
     try:
-        with open('radiomap' +type +'classifier_university_dataset.csv', 'w') as csvfile:
+        with open('datasets/Fingerprinting/radiomap' +type +'classifier_university_dataset.csv', 'w') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
             writer.writeheader()
             for data in list_json_fingerprints:
                 writer.writerow(data)
     except IOError:
         print("I/O error")
-    with open('radiomap' +type +'classifier_university_dataset.json', 'w') as outfile:
+    with open('datasets/Fingerprinting/radiomap' +type +'classifier_university_dataset.json', 'w') as outfile:
         json.dump(dict_fingerprints, outfile, cls=DjangoJSONEncoder, indent=3)
