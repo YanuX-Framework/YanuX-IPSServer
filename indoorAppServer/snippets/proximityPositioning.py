@@ -195,7 +195,7 @@ def apply_knn_classifier(test_data_df):
         result[0] = np.argmax(counts)
         prediction = experimentEncoder.inverse_transform(result)
         print("PREDICTION: ", prediction[0])
-    return prediction[0]
+    return prediction
 
 
 def apply_knn_regressor(test_data_df):
