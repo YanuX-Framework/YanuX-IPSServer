@@ -151,7 +151,7 @@ def apply_knn_regressor(types, access_points, beacons, deviceData):
     if ('Wi-fi' in types and 'Bluetooth' in types):
         row = parameters.loc[parameters['Experimentation'] == "KNN Regressor Wifi + Bluetooth"]
         X_train = dataset.iloc[:, 4:]
-        Y_train = dataset.iloc[:, 3:4]
+        Y_train = dataset.iloc[:, 1:3]
         nan_filler = X_train.min().min() * 1.010
         X_train = X_train.replace(0, np.nan)
         X_train = X_train.fillna(nan_filler)
@@ -179,16 +179,17 @@ def apply_knn_regressor(types, access_points, beacons, deviceData):
         if column in access_points:
             sample_list.append(access_points[column])
         else:
-            sample_list.append(0)
-        if column in beacons:
-            sample_list.append(beacons[column])
+            if column in beacons:
+                sample_list.append(beacons[column])
+            else:
+                sample_list.append(0)
     sample_2dlist = list()
     sample_2dlist.append(sample_list)
     X_test_list = np.array(sample_2dlist)
     X_test = pd.DataFrame(data=X_test_list, columns=X_train.columns)
-    X_test.replace(0, np.nan)
+    X_test = X_test.replace(0, np.nan)
     X_test = X_test.fillna(nan_filler)
-    result = compute_knn_regression(trainX_data=X_train, trainY_data=Y_train, testX_data=X_test,
+    result = compute_KNN_with_Regression(trainX_data=X_train, trainY_data=Y_train, testX_data=X_test,
                                     scaler=preprocessing,
                                     n_neighbors=number_neighbors, weights=weights, algorithm=algorithm,
                                     metric=distance)
@@ -238,7 +239,7 @@ def apply_svm_classifier(types, access_points, beacons, deviceData):
     sample_2dlist.append(sample_list)
     X_test_list = np.array(sample_2dlist)
     X_test = pd.DataFrame(data=X_test_list, columns=X_train.columns)
-    X_test.replace(0, np.nan)
+    X_test = X_test.replace(0, np.nan)
     X_test = X_test.fillna(nan_filler)
     result = compute_SVM_with_Classification(trainX_data=X_train, trainY_data=Y_train, testX_data=X_test,
                                              scaler=preprocessing, C_parameter=c_parameter, kernel_parameter=kernel,
