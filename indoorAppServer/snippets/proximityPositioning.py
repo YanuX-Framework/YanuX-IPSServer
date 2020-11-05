@@ -137,7 +137,8 @@ def data_cleaning(dataset, flag):
     dataset['labels'] = zone_changed
 
 
-def prepare_dataset(dataset, test_datadf):
+def prepare_dataset(test_datadf):
+    global dataset
     global train_Y
     global test_Y
     positions = dataset['coordinate_Y']
