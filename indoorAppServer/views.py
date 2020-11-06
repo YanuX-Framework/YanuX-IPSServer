@@ -498,7 +498,8 @@ class TrilaterationHandlerView(APIView):
         locations = []
         distances_list = []
         for k, v in access_points.items():
-            locations.append((v['x'], v['y']))
+            for i, j in v.items():
+                locations.append((j['x'], j['y']))
         for k, v in distances.items():
             distances_list.append(v)
         for aps, d in zip(locations, distances_list):
