@@ -164,7 +164,8 @@ def compute_matching_data(access_points_scanned, beacons_scanned):
             percentage_of_similar_aps = len(matching_list_aps) / len(aps_feature_imp)
         else:
             percentage_of_similar_aps = 0
-        matching_radio_map[radio_map] = (percentage_of_similar_aps * 100, len(matching_list_beacons))
+        radio_map_name = radio_map.split('radiomap_')
+        matching_radio_map[radio_map_name[1]] = (percentage_of_similar_aps * 100, len(matching_list_beacons))
         # Now we have for each radio map the number of matching access points and beacons
 
     ordered_radio_maps = compute_highest_tuple(matching_radio_map)
