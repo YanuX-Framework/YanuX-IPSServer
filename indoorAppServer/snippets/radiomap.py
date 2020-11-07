@@ -1,5 +1,4 @@
 import glob
-import os
 import pandas as pd
 from operator import itemgetter
 
@@ -164,8 +163,7 @@ def compute_matching_data(access_points_scanned, beacons_scanned):
             percentage_of_similar_aps = len(matching_list_aps) / len(aps_feature_imp)
         else:
             percentage_of_similar_aps = 0
-        radio_map_name = os.path.basename(radio_map)
-        matching_radio_map[radio_map_name] = (percentage_of_similar_aps * 100, len(matching_list_beacons))
+        matching_radio_map[radio_map] = (percentage_of_similar_aps * 100, len(matching_list_beacons))
         # Now we have for each radio map the number of matching access points and beacons
 
     ordered_radio_maps = compute_highest_tuple(matching_radio_map)
