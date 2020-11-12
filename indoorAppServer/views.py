@@ -226,7 +226,8 @@ class ScanningView(APIView):
 
     def apply_fingerprinting(self, matching_radio_map, radio_map_is_classifier):
         # Apply RF to Regression
-        self.environment_name = matching_radio_map['dataset']
+        radio_map_name = path.basename(matching_radio_map['dataset'])
+        self.environment_name = radio_map_name
         self.position_regression = fingerprintPositioning.apply_rf_regressor_scanning(
             estimator_options=trained_radio_maps[matching_radio_map['dataset']],
             radio_map=matching_radio_map['dataset'],
@@ -498,7 +499,8 @@ class TrilaterationHandlerView(APIView):
         locations = []
         distances_list = []
         for k, v in access_points.items():
-            locations.append((v['x'], v['y']))
+            for i, j in v.items():
+                locations.append((j['x'], j['y']))
         for k, v in distances.items():
             distances_list.append(v)
         for aps, d in zip(locations, distances_list):
