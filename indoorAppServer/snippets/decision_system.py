@@ -59,16 +59,19 @@ def create_fuzzy_system():
         number_beacons['Good'] & matching_aps['Not Enough'] & matching_beacons['Enough'] & beacons_locations[
             'Available'], technique['Trilateration'])
     rule9 = ctrl.Rule(
-        number_beacons['Good'] & matching_aps['Enough'] & matching_beacons['Not Enough'] & beacons_locations[
+        number_beacons['Good'] & matching_aps['Enough'] & matching_beacons['Enough'] & beacons_locations[
             'Available'], technique['Trilateration'])
     rule10 = ctrl.Rule(
+        number_beacons['Good'] & matching_aps['Enough'] & matching_beacons['Not Enough'] & beacons_locations[
+            'Available'], technique['Trilateration'])
+    rule11 = ctrl.Rule(
         number_beacons['None'] & matching_aps['Not Enough'] & matching_beacons['Not Enough'], technique['None'])
 
     rule1.view()
 
     # Control System Creation
     position_technique_ctrl = ctrl.ControlSystem([rule1, rule2, rule3,
-                                                  rule4, rule5, rule6, rule7, rule8, rule9, rule10])
+                                                  rule4, rule5, rule6, rule7, rule8, rule9, rule10, rule11])
     return {'System': position_technique_ctrl, 'Technique MF': technique}
 
 
