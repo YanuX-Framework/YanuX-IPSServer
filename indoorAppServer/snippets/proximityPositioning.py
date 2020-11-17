@@ -1,4 +1,6 @@
 import numpy as np
+import pandas as pd
+
 from sklearn.preprocessing import LabelEncoder
 
 from . import algorithms
@@ -6,8 +8,8 @@ from .algorithms import *
 from ..snippets import common
 
 dataset_heroku = '/app/datasets/Proximity/dataset_train_university.csv'
-dataset_local = 'datasets/Proximity/dataset_train_university.csv'
-dataset = pd.read_csv(dataset_heroku)
+dataset_local = '../datasets/Proximity/dataset_train_university.csv'
+dataset = pd.read_csv(dataset_local)
 
 '''
 INITIALIZATION FOR SCANNING PHASE
@@ -27,7 +29,6 @@ train_Y = None
 test_X_rssi = None
 test_X_rolling_mean = None
 test_combination_features_X = None
-
 
 def train_dataset(x_train, columns, algorithm):
     global encoder

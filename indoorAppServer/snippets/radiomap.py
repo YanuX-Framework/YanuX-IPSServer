@@ -4,8 +4,7 @@ from operator import itemgetter
 
 from ..snippets import algorithms, common
 
-radio_maps_local = glob.glob(
-    'D:/College/5th Year College/TESE\Desenvolvimento/Code\Application/IPS/Server/datasets/Fingerprinting/radiomap*.csv')
+radio_maps_local = glob.glob('../datasets/Fingerprinting/radiomap*.csv')
 radio_maps_heroku = glob.glob('/app/datasets/Fingerprinting/radiomap*.csv')
 feature_importance = {}
 trained_data = {}
@@ -46,7 +45,7 @@ def train_algorithms(x_train, dataset, radio_map, trained_radio_maps, columns):
 def train_each_radio_map():
     global feature_importance
     trained_radio_maps = dict()
-    for radio_map in radio_maps_heroku:
+    for radio_map in radio_maps_local:
         dataset = pd.read_csv(radio_map)
 
         columns = list(dataset.columns)
@@ -115,7 +114,7 @@ def compute_matching_data(access_points_scanned, beacons_scanned):
     size_dataset = {}
     classification_assert_dict = {}
 
-    for radio_map in radio_maps_heroku:
+    for radio_map in radio_maps_local:
         # Init dataset related with radio map
         dataset = pd.read_csv(radio_map)
         result = {}
