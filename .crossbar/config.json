@@ -1,7 +1,6 @@
 {
   "version": 2,
-  "controller": {
-  },
+  "controller": {},
   "workers": [
     {
       "type": "router",
@@ -37,7 +36,8 @@
             "/": {
               "type": "wsgi",
               "module": "Server.wsgi",
-              "object": "application"
+              "object": "application",
+              "maxthreads": 1
             },
             "notify": {
               "type": "publisher",
