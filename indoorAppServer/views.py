@@ -259,7 +259,6 @@ class ScanningView(APIView):
 
         # Trilateration with LSE variables
         min_distance = float('inf')
-        closest_location = None
 
         # Sort beacons by number of samples recorded
         sorted_dict = sorted(self.beacons_ml, key=lambda k: len(self.beacons_ml[k][1]), reverse=True)
@@ -276,16 +275,28 @@ class ScanningView(APIView):
                 distance_predictions[k] = distance_prediction[0, 0]
         print('Distance Prediction to each beacon: ' + str(distance_predictions))
 
-        # Find the nearest beacon
-        for k, v in distance_predictions.items():
-            if k in beacons_known_locations:
-                if v < min_distance:
-                    min_distance = v
-                    closest_location = beacons_known_locations[k]
+        # Find the weighted average
+        l = len(beacons_known_locations)
+        r = [distance_predictions[key] for key in sorted(distance_predictions.keys())]
+        c = [beacons_known_locations[key] for key in sorted(beacons_known_locations.keys())]
+        S = sum(r)
+        W = [(S - w) / ((l - 1) * S) for w in r]
+
+        initial_location_tuple = (0, 0)
+        for i in range(l):
+            initial_location_tuple = (
+                initial_location_tuple[0] + W[i] * c[i]['x'], initial_location_tuple[1] + W[i] * c[i]['y'])
+
+        # for k, v in distance_predictions.items():
+        #     if k in beacons_known_locations:
+        #         if v < min_distance:
+        #             min_distance = v
+        #             closest_location = beacons_known_locations[k]
 
         # Compute SciPy minimize function to obtain position prediction
-        initial_location = closest_location
-        initial_location_tuple = (initial_location['x'], initial_location['y'])
+        # initial_location = closest_location
+        # initial_location_tuple = (initial_location['x'], initial_location['y'])
+
         result = opt.minimize(
             common.mse,  # The error function
             initial_location_tuple,  # The initial guess
