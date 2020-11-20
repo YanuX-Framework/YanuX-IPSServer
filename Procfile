@@ -1,1 +1,1 @@
-web: crossbar start
+web:  crossbar start & gunicorn Server.wsgi --bind 0.0.0.0:8080 --preload --max-requests 30 --max-requests-jitter 50 & wait -n
