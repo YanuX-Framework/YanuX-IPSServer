@@ -94,8 +94,8 @@ def checkScaler(preprocessingString):
 
 
 def apply_knn_classifier(types, access_points, beacons, deviceData):
-    dataset = pd.read_csv('/app/datasets/Fingerprinting/radiomapBluetoothWiFitest.csv')
-    parameters = pd.read_csv('/app/datasets/Fingerprinting/parameters_results.csv')
+    dataset = pd.read_csv('datasets/Fingerprinting/radiomapBluetoothWiFitest.csv')
+    parameters = pd.read_csv('datasets/Fingerprinting/parameters_results.csv')
     beacon_index = common.find_beacon_index(dataset)
     if ('Wi-fi' in types and 'Bluetooth' in types):
         row = parameters.loc[parameters['Experimentation'] == "KNN Classifier Wifi + Bluetooth"]
@@ -145,8 +145,8 @@ def apply_knn_classifier(types, access_points, beacons, deviceData):
 
 
 def apply_knn_regressor(types, access_points, beacons, deviceData):
-    dataset = pd.read_csv('/app/datasets/Fingerprinting/radiomapBluetoothWiFitest.csv')
-    parameters = pd.read_csv('/app/datasets/Fingerprinting/parameters_results.csv')
+    dataset = pd.read_csv('datasets/Fingerprinting/radiomapBluetoothWiFitest.csv')
+    parameters = pd.read_csv('datasets/Fingerprinting/parameters_results.csv')
     beacon_index = common.find_beacon_index(dataset)
     if ('Wi-fi' in types and 'Bluetooth' in types):
         row = parameters.loc[parameters['Experimentation'] == "KNN Regressor Wifi + Bluetooth"]
@@ -197,8 +197,8 @@ def apply_knn_regressor(types, access_points, beacons, deviceData):
 
 
 def apply_svm_classifier(types, access_points, beacons, deviceData):
-    dataset = pd.read_csv('/app/datasets/Fingerprinting/radiomapBluetoothWiFitest.csv')
-    parameters = pd.read_csv('/app/datasets/Fingerprinting/parameters_svm_results.csv')
+    dataset = pd.read_csv('datasets/Fingerprinting/radiomapBluetoothWiFitest.csv')
+    parameters = pd.read_csv('datasets/Fingerprinting/parameters_svm_results.csv')
     beacon_index = common.find_beacon_index(dataset)
     if ('Wi-fi' in types and 'Bluetooth' in types):
         row = parameters.loc[parameters['Experimentation'] == "SVM Classifier Wifi + Bluetooth"]
@@ -250,8 +250,8 @@ def apply_svm_classifier(types, access_points, beacons, deviceData):
 
 
 def apply_kmeans_knn_classifier(types, access_points, beacons, deviceData):
-    dataset = pd.read_csv('/app/datasets/Fingerprinting/radiomapBluetoothWiFitest.csv')
-    parameters = pd.read_csv('/app/datasets/Fingerprinting/parameters_results_clustering.csv')
+    dataset = pd.read_csv('datasets/Fingerprinting/radiomapBluetoothWiFitest.csv')
+    parameters = pd.read_csv('datasets/Fingerprinting/parameters_results_clustering.csv')
     beacon_index = common.find_beacon_index(dataset)
     if ('Wi-fi' in types and 'Bluetooth' in types):
         row = parameters.loc[parameters['Experimentation'] == "K-Means Clustering Wifi + Bluetooth"]

@@ -2,14 +2,30 @@ import glob
 import pandas as pd
 from operator import itemgetter
 
+# from os import path
+# import joblib
+
 from ..snippets import algorithms, common
 
-radio_maps_local = glob.glob('../datasets/Fingerprinting/radiomap*.csv')
-radio_maps_heroku = glob.glob('/app/datasets/Fingerprinting/radiomap*.csv')
-feature_importance = {}
-trained_data = {}
-label_encoders = {}
+radio_maps = glob.glob('datasets/Fingerprinting/radiomap*.csv')
 
+# feature_importance_save_file='save/feature_importance.sav'
+# if(path.exists(feature_importance_save_file)):
+#     feature_importance = joblib.load(feature_importance_save_file)
+# else:
+feature_importance = {}
+
+# trained_data_save_file='save/trained_data.sav'
+# if(path.exists(trained_data_save_file)):
+#     trained_data = joblib.load(trained_data_save_file)
+# else:
+trained_data = {}
+    
+# label_encoders_save_file='save/label_encoders.sav'
+# if(path.exists(label_encoders_save_file)):
+#     label_encoders = joblib.load(label_encoders_save_file)
+# else:
+label_encoders = {}
 
 def get_x_train(radio_map):
     return trained_data[radio_map]
@@ -43,9 +59,8 @@ def train_algorithms(x_train, dataset, radio_map, trained_radio_maps, columns):
 
 
 def train_each_radio_map():
-    global feature_importance
     trained_radio_maps = dict()
-    for radio_map in radio_maps_local:
+    for radio_map in radio_maps:
         dataset = pd.read_csv(radio_map)
 
         columns = list(dataset.columns)
@@ -59,8 +74,6 @@ def train_each_radio_map():
 
         # Init variables
         first_beacon_index = -1
-        X_train = None
-        train_Y = None
 
         # Find beacon position
         for ap in dataset.iloc[:, zone_index + 1:]:
@@ -77,6 +90,10 @@ def train_each_radio_map():
         feature_importance[radio_map] = common.compute_feature_selection(x_train, y_train)
         train_algorithms(x_train=x_train, columns=columns, radio_map=radio_map,
                          trained_radio_maps=trained_radio_maps,dataset=dataset)
+    
+    # joblib.dump(feature_importance, feature_importance_save_file)   
+    # joblib.dump(trained_data, trained_data_save_file)
+    # joblib.dump(label_encoders, label_encoders_save_file)
     return trained_radio_maps
 
 
@@ -114,7 +131,7 @@ def compute_matching_data(access_points_scanned, beacons_scanned):
     size_dataset = {}
     classification_assert_dict = {}
 
-    for radio_map in radio_maps_local:
+    for radio_map in radio_maps:
         # Init dataset related with radio map
         dataset = pd.read_csv(radio_map)
         result = {}

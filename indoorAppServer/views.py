@@ -35,7 +35,6 @@ print('Server initialization finished with code 0.')
 CLASSES FOR MODELS SAVED IN THE DABATASE
 '''
 
-
 class UserView(viewsets.ModelViewSet):
     queryset = UserTable.objects.all()
     serializer_class = UserSerializer
@@ -70,11 +69,9 @@ class TypeEnum(Enum):
     WIFI = 1
     BLUETOOTH = 2
 
-
 '''
 CLASS TO HANDLE SCANNING SAMPLES SENT FROM THE MOBILE DEVICE
 '''
-
 
 class ScanningView(APIView):
     username = None
@@ -390,21 +387,14 @@ class ScanningView(APIView):
                                     radio_map_is_classifier=radio_map_is_classifier,
                                     matching_radio_map=matching_radio_map,
                                     beacons_known_locations=beacons_known_locations)
-
         return Response(status=status.HTTP_200_OK)
-
 
 '''
 EXPERIMENT CLASSES FOR TRILATERATION/PROXIMITY/FINGERPRINTING
 '''
 
-
 class ProximityDistanceView(APIView):
-
     def post(self, request, formate=None):
-        serializer_context = {
-            'request': request,
-        }
         df = csvHandler.compute_csv(request)
         if path.exists(".\dataset_test_university.csv"):
             df.to_csv(r'.\dataset_test_university.csv', mode='a', index=False, header=False)
@@ -414,7 +404,6 @@ class ProximityDistanceView(APIView):
 
 
 class FilterView(APIView):
-
     def post(self, request, format=None):
         convertJson.jsonToFile('BluetoothWiFi')
         return Response(status=status.HTTP_200_OK)
@@ -441,7 +430,6 @@ class FilterView(APIView):
 
 
 class TrilaterationHandlerView(APIView):
-
     def post(self, request, format=None):
         serializer_context = {
             'request': request,
@@ -525,7 +513,6 @@ class TrilaterationHandlerView(APIView):
 
 
 class ProximityAlgorithmsView(APIView):
-
     def post(self, request, format=None):
         isClassifier = False
         serializer_context = {
@@ -561,7 +548,6 @@ class ProximityAlgorithmsView(APIView):
 
 
 class PositioningAlgorithmsView(APIView):
-
     def post(self, request, format=None):
         isClassifier = False
         serializer_context = {
@@ -599,11 +585,9 @@ class PositioningAlgorithmsView(APIView):
 
         return compute_Response(prediction, isClassifier, serializer_context)
 
-
 '''
 HELPER FUNCTIONS FOR EXPERIMENT CLASSES
 '''
-
 
 def compute_Response_Trilateration(prediction, isClassifier, serializer_context):
     print('prediction', prediction)
@@ -615,7 +599,6 @@ def compute_Response_Trilateration(prediction, isClassifier, serializer_context)
         return Response(serialized.data, status=status.HTTP_200_OK)
     else:
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
 
 def compute_Response(prediction, isClassifier, serializer_context):
     print('prediction', prediction)

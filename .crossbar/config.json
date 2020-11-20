@@ -30,15 +30,9 @@
           "type": "web",
           "endpoint": {
             "type": "tcp",
-            "port": "$PORT"
+            "port": 8080
           },
           "paths": {
-            "/": {
-              "type": "wsgi",
-              "module": "Server.wsgi",
-              "object": "application",
-              "maxthreads": 1
-            },
             "notify": {
               "type": "publisher",
               "realm": "realm1",
