@@ -74,6 +74,7 @@ CLASS TO HANDLE SCANNING SAMPLES SENT FROM THE MOBILE DEVICE
 '''
 
 class ScanningView(APIView):
+
     username = None
     deviceUuid = None
     accessPointsDetected = None
