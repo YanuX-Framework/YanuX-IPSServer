@@ -3,7 +3,6 @@ crossbar==20.8.1
 Django==3.1.1
 djangorestframework==3.12.2
 django-on-heroku==1.1.2
-gunicorn==20.0.4
 ipython==7.19.0
 msgpack==1.0.0
 matplotlib==3.3.3
