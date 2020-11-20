@@ -36,8 +36,7 @@
             "/": {
               "type": "wsgi",
               "module": "Server.wsgi",
-              "object": "application",
-              "maxthreads": 1
+              "object": "application"
             },
             "notify": {
               "type": "publisher",
