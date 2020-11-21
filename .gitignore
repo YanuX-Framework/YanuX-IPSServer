@@ -63,3 +63,5 @@ venv.bak/
 .crossbar/key.priv
 
 save/
+
+.crossbar/key.pub

@@ -14,10 +14,8 @@ import os
 #import django_heroku
 import django_on_heroku
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -26,13 +24,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'hs_954!a_gw-b#&%(fqxt0kcp79z#@3x9nn%!z!v0n-wma1i&8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
-#ALLOWED_HOSTS = ['indoorlocationapp.herokuapp.com','10.0.2.2','127.0.0.1','localhost','0.0.0.0','192.168.1.6','192.168.137.61','192.168.42.55','192.168.43.166']
 DEBUG = False
-ALLOWED_HOSTS = ['127.0.0.1','localhost','0.0.0.0']
+ALLOWED_HOSTS = ['localhost']
+#ALLOWED_HOSTS = ['indoorlocationapp.herokuapp.com','10.0.2.2','127.0.0.1','localhost','0.0.0.0','192.168.1.6','192.168.137.61','192.168.42.55','192.168.43.166']
 
 # Application definition
-
 INSTALLED_APPS = [
     'indoorAppServer.apps.IndoorAppServerConfig',
     'rest_framework',
@@ -59,8 +55,7 @@ ROOT_URLCONF = 'Server.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,10 +70,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Server.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -86,10 +79,8 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -105,26 +96,20 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-STATIC_ROOT= os.path.join(BASE_DIR,'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+# NOTE: Run "python manage.py collectstatic" before deploying
 
 # Configure Django App for Heroku.
-#django_heroku.settings(locals())
+# django_heroku.settings(locals())
 django_on_heroku.settings(locals())
