@@ -1,3 +1,3 @@
 #!/bin/sh
 crossbar start &
-gunicorn Server.wsgi --bind 0.0.0.0:3100 --preload --workers=2 --threads=1 --max-requests=500 --max-requests-jitter=100
+gunicorn Server.wsgi --bind 0.0.0.0:3100 --preload --workers=1 --threads=2 --max-requests=400 --max-requests-jitter=100
