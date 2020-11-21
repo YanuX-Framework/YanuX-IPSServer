@@ -280,17 +280,7 @@ class ScanningView(APIView):
             if(math.isnan(W[i])):
                 initial_location_tuple = (initial_location_tuple[0] + (1/l) * c[i]['x'], initial_location_tuple[1] + (1/l) * c[i]['y']) 
             else:
-                initial_location_tuple = (initial_location_tuple[0] + W[i] * c[i]['x'], initial_location_tuple[1] + W[i] * c[i]['y'])            
-
-        # for k, v in distance_predictions.items():
-        #     if k in beacons_known_locations:
-        #         if v < min_distance:
-        #             min_distance = v
-        #             closest_location = beacons_known_locations[k]
-
-        # Compute SciPy minimize function to obtain position prediction
-        # initial_location = closest_location
-        # initial_location_tuple = (initial_location['x'], initial_location['y'])
+                initial_location_tuple = (initial_location_tuple[0] + W[i] * c[i]['x'], initial_location_tuple[1] + W[i] * c[i]['y'])
 
         result = opt.minimize(
             common.mse,  # The error function
