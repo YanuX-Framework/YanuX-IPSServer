@@ -57,11 +57,6 @@ ENV/
 env.bak/
 venv.bak/
 
-
-
-
-.crossbar/key.priv
-
-save/
-
 .crossbar/key.pub
+.crossbar/key.priv
+save/
