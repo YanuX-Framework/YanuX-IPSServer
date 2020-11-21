@@ -4,6 +4,11 @@
   "workers": [
     {
       "type": "router",
+      "options": {
+        "pythonpath": [
+          ".."
+        ]
+      },
       "realms": [
         {
           "name": "realm1",
@@ -30,9 +35,14 @@
           "type": "web",
           "endpoint": {
             "type": "tcp",
-            "port": 8080
+            "port": "$PORT"
           },
           "paths": {
+            "/": {
+              "type": "reverseproxy",
+              "host": "localhost",
+              "port": 3100
+            },
             "notify": {
               "type": "publisher",
               "realm": "realm1",

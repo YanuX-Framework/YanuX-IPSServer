@@ -253,10 +253,6 @@ class ScanningView(APIView):
         self.position_classification = proximityPositioning.apply_knn_classification_scanning(test_df)
 
     def apply_trilateration(self, beacons_known_locations):
-
-        # Trilateration with LSE variables
-        min_distance = float('inf')
-
         # Sort beacons by number of samples recorded
         sorted_dict = sorted(self.beacons_ml, key=lambda k: len(self.beacons_ml[k][1]), reverse=True)
 
@@ -281,8 +277,10 @@ class ScanningView(APIView):
 
         initial_location_tuple = (0, 0)
         for i in range(l):
-            initial_location_tuple = (
-                initial_location_tuple[0] + W[i] * c[i]['x'], initial_location_tuple[1] + W[i] * c[i]['y'])
+            if(math.isnan(W[i])):
+                initial_location_tuple = (initial_location_tuple[0] + (1/l) * c[i]['x'], initial_location_tuple[1] + (1/l) * c[i]['y']) 
+            else:
+                initial_location_tuple = (initial_location_tuple[0] + W[i] * c[i]['x'], initial_location_tuple[1] + W[i] * c[i]['y'])            
 
         # for k, v in distance_predictions.items():
         #     if k in beacons_known_locations:
@@ -313,7 +311,7 @@ class ScanningView(APIView):
 
     def structure_position_results(self, position_technique):
         position_dict = {}
-        if position_technique is 'Trilateration':
+        if position_technique == 'Trilateration':
             position_dict['Regression'] = self.position_regression
             position_dict['Classification'] = self.position_classification
         else:
@@ -330,17 +328,14 @@ class ScanningView(APIView):
         print('Position computed. Sending update to subscribers.')
         radio_map_identifier = None
         beacon = None
-        if position_technique is 'Trilateration' or position_technique is 'Fingerprinting':
+        if position_technique == 'Trilateration' or position_technique == 'Fingerprinting':
             radio_map_identifier = self.environment_name
-        if position_technique is 'Proximity':
+        if position_technique == 'Proximity':
             beacon = beacon_name
         websockets.publish(self.username, self.deviceUuid, position_dict, self.orientation, radio_map_identifier,
                            beacon)
 
     def post(self, request):
-        serializer_context = {
-            'request': request,
-        }
         print('Received POST Request with Scanning Data. Computing Position...')
         sample_dict = request.data
 

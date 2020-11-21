@@ -94,10 +94,9 @@ def decode(prediction):
 
 
 def load_access_points_locations():
-    locations_local = glob.glob('../locations/*.json')
-    locations_heroku = glob.glob('/app/locations/*.json')
+    locations = glob.glob('locations/*.json')
     location_dict = {}
-    for location in locations_local:
+    for location in locations:
         with open(location) as json_file:
             data = json.load(json_file)
             beacons = {}

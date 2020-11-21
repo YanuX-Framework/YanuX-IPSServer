@@ -7,7 +7,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-ENV PORT=8080
-EXPOSE 8080
+ENV PORT=3101
+EXPOSE 3101
 
 CMD crossbar start

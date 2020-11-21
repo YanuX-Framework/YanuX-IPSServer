@@ -2,30 +2,30 @@ import glob
 import pandas as pd
 from operator import itemgetter
 
-# from os import path
-# import joblib
+from os import path
+import joblib
 
 from ..snippets import algorithms, common
 
 radio_maps = glob.glob('datasets/Fingerprinting/radiomap*.csv')
 
-# feature_importance_save_file='save/feature_importance.sav'
-# if(path.exists(feature_importance_save_file)):
-#     feature_importance = joblib.load(feature_importance_save_file)
-# else:
-feature_importance = {}
+feature_importance_save_file='save/feature_importance.sav'
+if(path.exists(feature_importance_save_file)):
+    feature_importance = joblib.load(feature_importance_save_file)
+else:
+    feature_importance = {}
 
-# trained_data_save_file='save/trained_data.sav'
-# if(path.exists(trained_data_save_file)):
-#     trained_data = joblib.load(trained_data_save_file)
-# else:
-trained_data = {}
+trained_data_save_file='save/trained_data.sav'
+if(path.exists(trained_data_save_file)):
+    trained_data = joblib.load(trained_data_save_file)
+else:
+    trained_data = {}
     
-# label_encoders_save_file='save/label_encoders.sav'
-# if(path.exists(label_encoders_save_file)):
-#     label_encoders = joblib.load(label_encoders_save_file)
-# else:
-label_encoders = {}
+label_encoders_save_file='save/label_encoders.sav'
+if(path.exists(label_encoders_save_file)):
+    label_encoders = joblib.load(label_encoders_save_file)
+else:
+    label_encoders = {}
 
 def get_x_train(radio_map):
     return trained_data[radio_map]
@@ -91,9 +91,9 @@ def train_each_radio_map():
         train_algorithms(x_train=x_train, columns=columns, radio_map=radio_map,
                          trained_radio_maps=trained_radio_maps,dataset=dataset)
     
-    # joblib.dump(feature_importance, feature_importance_save_file)   
-    # joblib.dump(trained_data, trained_data_save_file)
-    # joblib.dump(label_encoders, label_encoders_save_file)
+    joblib.dump(feature_importance, feature_importance_save_file)   
+    joblib.dump(trained_data, trained_data_save_file)
+    joblib.dump(label_encoders, label_encoders_save_file)
     return trained_radio_maps
 
 
