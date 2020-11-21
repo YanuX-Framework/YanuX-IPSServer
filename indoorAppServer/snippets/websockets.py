@@ -8,7 +8,7 @@ def publish(username, uuid, position,orientation, radio_map=None, beacon=None):
     if radio_map is not None:
         payload['radio_map'] = radio_map
     print('Publishing new message to topic onLocationUpdate. DATA: ' + str(payload))
-    response = requests.post('http://127.0.0.1:8080/notify',
+    response = requests.post('http://127.0.0.1:'+os.getenv('PORT')+'/notify',
                              json={
                                  'topic': 'onLocationUpdate',
                                  'args': [payload]

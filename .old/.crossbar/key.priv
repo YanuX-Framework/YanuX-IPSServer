@@ -1,8 +1,0 @@
-Crossbar.io node private key - KEEP THIS SAFE!
-
-creator: pedro@lambda
-created-at: 2020-11-17T19:15:05.093Z
-machine-id: 33071dcd4b1d46ccb66e1b6839e3fb83
-node-authid: lambda
-public-key-ed25519: 5d369c2180983a26f35ef898939cb05b221ea4336c02dc05e31f21fcfc24c81d
-private-key-ed25519: a4b93c602fa75cf4a3c7c33a3ace70bcc50a4a274a03f192f026cadc448dd98a

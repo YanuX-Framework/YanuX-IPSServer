@@ -97,8 +97,6 @@ class ClientSession(ApplicationSession):
 
 
 if __name__ == '__main__':
-
     from autobahn.twisted.wamp import ApplicationRunner
-
-    runner = ApplicationRunner(url='ws://localhost:8080/ws', realm='realm1')
+    runner = ApplicationRunner(url='ws://localhost:'+os.getenv('PORT')+'/ws', realm='realm1')
     runner.run(ClientSession)
