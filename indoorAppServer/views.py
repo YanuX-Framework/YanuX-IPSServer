@@ -253,6 +253,9 @@ class ScanningView(APIView):
         self.position_classification = proximityPositioning.apply_knn_classification_scanning(test_df)
 
     def apply_trilateration(self, beacons_known_locations):
+        # # Trilateration with LSE variables
+        # min_distance = float('inf')
+
         # Sort beacons by number of samples recorded
         sorted_dict = sorted(self.beacons_ml, key=lambda k: len(self.beacons_ml[k][1]), reverse=True)
 
@@ -281,6 +284,16 @@ class ScanningView(APIView):
                 initial_location_tuple = (initial_location_tuple[0] + (1/l) * c[i]['x'], initial_location_tuple[1] + (1/l) * c[i]['y']) 
             else:
                 initial_location_tuple = (initial_location_tuple[0] + W[i] * c[i]['x'], initial_location_tuple[1] + W[i] * c[i]['y'])
+
+        # for k, v in distance_predictions.items():
+        #     if k in beacons_known_locations:
+        #         if v < min_distance:
+        #             min_distance = v
+        #             closest_location = beacons_known_locations[k]
+
+        # # Compute SciPy minimize function to obtain position prediction
+        # initial_location = closest_location
+        # initial_location_tuple = (initial_location['x'], initial_location['y'])
 
         result = opt.minimize(
             common.mse,  # The error function
