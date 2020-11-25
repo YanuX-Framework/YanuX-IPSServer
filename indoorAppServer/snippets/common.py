@@ -114,10 +114,21 @@ def check_zone(y):
     else:
         return 'Public'
 
+def mae(x, rfv, distances, beacons):
+    errors = 0.0
+    x = (x[0], x[1])
+    available = 0
+    for k, v in rfv:
+        if k in beacons:
+            available += 1
+            distance_known = distances[k]
+            distance_computed = compute_distance_coordinate_system(x[0], x[1], beacons[k]['x'], beacons[k]['y'])
+            errors += abs(distance_known - distance_computed)
+    mae = errors / available
+    return mae
 
 def mse(x, rfv, distances, beacons):
     squared_errors = 0.0
-    empty_list = {}
     x = (x[0], x[1])
     available = 0
     for k, v in rfv:

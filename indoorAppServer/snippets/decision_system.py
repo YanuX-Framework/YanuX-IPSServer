@@ -126,3 +126,4 @@ def test_phase(control_system, technique):
     assert test_rule9 == 'Trilateration'
     test_rule10 = compute_fuzzy_decision(control_system, technique, 0, 0, 0, 3)
     assert test_rule10 == 'None'
+    #TODO: Add test for "test_rule11".

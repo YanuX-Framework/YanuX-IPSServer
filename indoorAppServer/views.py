@@ -253,9 +253,6 @@ class ScanningView(APIView):
         self.position_classification = proximityPositioning.apply_knn_classification_scanning(test_df)
 
     def apply_trilateration(self, beacons_known_locations):
-        # # Trilateration with LSE variables
-        # min_distance = float('inf')
-
         # Sort beacons by number of samples recorded
         sorted_dict = sorted(self.beacons_ml, key=lambda k: len(self.beacons_ml[k][1]), reverse=True)
 
@@ -271,19 +268,8 @@ class ScanningView(APIView):
                 distance_predictions[k] = distance_prediction[0, 0]
         print('Distance Prediction to each beacon: ' + str(distance_predictions))
 
-        # Find the weighted average
-        l = len(beacons_known_locations)
-        r = [distance_predictions[key] for key in sorted(distance_predictions.keys())]
-        c = [beacons_known_locations[key] for key in sorted(beacons_known_locations.keys())]
-        S = sum(r)
-        W = [(S - w) / ((l - 1) * S) for w in r]
-
-        initial_location_tuple = (0, 0)
-        for i in range(l):
-            if(math.isnan(W[i])):
-                initial_location_tuple = (initial_location_tuple[0] + (1/l) * c[i]['x'], initial_location_tuple[1] + (1/l) * c[i]['y']) 
-            else:
-                initial_location_tuple = (initial_location_tuple[0] + W[i] * c[i]['x'], initial_location_tuple[1] + W[i] * c[i]['y'])
+        # # Trilateration with LSE variables
+        # min_distance = float('inf')
 
         # for k, v in distance_predictions.items():
         #     if k in beacons_known_locations:
@@ -295,17 +281,36 @@ class ScanningView(APIView):
         # initial_location = closest_location
         # initial_location_tuple = (initial_location['x'], initial_location['y'])
 
+        # Find the weighted average
+        l = len(beacons_known_locations)
+        r = [distance_predictions[key] for key in sorted(distance_predictions.keys())]
+        c = [beacons_known_locations[key] for key in sorted(beacons_known_locations.keys())]
+        S = sum(r)
+        if S == 0:
+            [1/l for w in r]
+        else:
+            W = [(S - w) / ((l - 1) * S) for w in r]
+
+        print('Weights:', W,' Sum:', sum(W))
+
+        initial_location_tuple = (0, 0)
+        for i in range(l):
+            initial_location_tuple = (initial_location_tuple[0] + W[i] * c[i]['x'], initial_location_tuple[1] + W[i] * c[i]['y'])
+        
+        #initial_location_tuple = (0,0)
+        print('Initial Location:', initial_location_tuple)
+
         result = opt.minimize(
-            common.mse,  # The error function
+            common.mae,  # The error function
             initial_location_tuple,  # The initial guess
-            args=(rfv,
-                  distance_predictions,
-                  beacons_known_locations),
-            method='L-BFGS-B',  # The optimisation algorithm
-            options={
-                'ftol': 1e-5,  # Tolerance
-                'maxiter': 1e+7  # Maximum iterations
-            })
+            args=(rfv, distance_predictions, beacons_known_locations),
+            
+            #method='L-BFGS-B',  # The optimisation algorithm
+            #options={
+            #    'ftol': 1e-5,  # Tolerance
+            #    'maxiter': 1e+7  # Maximum iterations
+            #}
+        )
 
         prediction = result.x
 
