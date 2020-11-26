@@ -301,15 +301,15 @@ class ScanningView(APIView):
         print('Initial Location:', initial_location_tuple)
 
         result = opt.minimize(
-            common.mae,  # The error function
+            common.mse,  # The error function
             initial_location_tuple,  # The initial guess
             args=(rfv, distance_predictions, beacons_known_locations),
             
-            #method='L-BFGS-B',  # The optimisation algorithm
-            #options={
-            #    'ftol': 1e-5,  # Tolerance
-            #    'maxiter': 1e+7  # Maximum iterations
-            #}
+            method='L-BFGS-B',  # The optimisation algorithm
+            options={
+                'ftol': 1e-5,  # Tolerance
+                'maxiter': 1e+7  # Maximum iterations
+            }
         )
 
         prediction = result.x
