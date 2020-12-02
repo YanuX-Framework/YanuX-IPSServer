@@ -304,11 +304,11 @@ class ScanningView(APIView):
             common.mse,  # The error function
             initial_location_tuple,  # The initial guess
             args=(rfv, distance_predictions, beacons_known_locations),
-            method='L-BFGS-B',  # The optimisation algorithm
-            options={
-                'ftol': 1e-5,  # Tolerance
-                'maxiter': 1e+7  # Maximum iterations
-            },
+            #method='L-BFGS-B',  # The optimisation algorithm
+            #options={
+            #    'ftol': 1e-5,  # Tolerance
+            #    'maxiter': 1e+7  # Maximum iterations
+            #},
             #bounds=[(0, 7.91), (0, 8.12)]
         )
 
@@ -324,7 +324,7 @@ class ScanningView(APIView):
             position_dict['Classification'] = self.position_classification
         else:
             if self.position_regression is not None:
-                if len(self.position_regression) == 2:
+                if len(self.position_regression[0]) == 2:
                     position_dict['Regression'] = (self.position_regression[0][0], self.position_regression[0][1])
                 else:
                     position_dict['Regression'] = self.position_regression[0][0]
