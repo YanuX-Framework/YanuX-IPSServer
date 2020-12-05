@@ -1,6 +1,6 @@
 autobahn==20.7.1
 crossbar==20.8.1
-Django==3.1.1
+Django==3.1.4
 djangorestframework==3.12.2
 django-on-heroku==1.1.2
 gunicorn==20.0.4
@@ -8,10 +8,11 @@ ipython==7.19.0
 joblib==0.17.0
 msgpack==1.0.0
 matplotlib==3.3.3
-numpy==1.19.2
-pandas==1.1.2
-requests==2.24.0
+numpy==1.19.4
+pandas==1.1.4
+pip==20.3.1
+requests==2.25.0
 scikit-fuzzy==0.4.2
 scikit-learn==0.23.2
-scipy==1.5.2
+scipy==1.5.4
 Twisted==20.3.0
