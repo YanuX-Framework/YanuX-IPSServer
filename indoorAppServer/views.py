@@ -248,9 +248,9 @@ class ScanningView(APIView):
         test_df = csvHandler.compute_csv_in_scanning_phase(sample)
 
         # Apply KNN to Regression
-        self.position_regression = proximityPositioning.apply_knn_regression_scanning(test_df)
+        self.position_regression = proximityPositioning.apply_knn_regression_scanning(test_df)#.apply_svm_regression_scanning(test_df)#
         # Apply KNN to Classification
-        self.position_classification = proximityPositioning.apply_knn_classification_scanning(test_df)
+        self.position_classification = proximityPositioning.apply_knn_classification_scanning(test_df)#.apply_svm_classification_scanning(test_df)
 
     def apply_trilateration(self, beacons_known_locations):
         # Sort beacons by number of samples recorded
@@ -264,8 +264,8 @@ class ScanningView(APIView):
         rfv = test_df.groupby(['BLE Beacon'])
         for k, v in rfv:
             if k in beacons_known_locations:
-                distance_prediction = proximityPositioning.apply_knn_regression_scanning(v)
-                distance_predictions[k] = distance_prediction[0, 0]
+                distance_prediction = proximityPositioning.apply_knn_regression_scanning(v)#.apply_svm_regression_scanning(v)
+                distance_predictions[k] = distance_prediction[0, 0]#distance_prediction[0]
         print('Distance Prediction to each beacon: ' + str(distance_predictions))
 
         # # Trilateration with LSE variables
@@ -304,12 +304,12 @@ class ScanningView(APIView):
             common.mse,  # The error function
             initial_location_tuple,  # The initial guess
             args=(rfv, distance_predictions, beacons_known_locations),
-            
-            method='L-BFGS-B',  # The optimisation algorithm
-            options={
-                'ftol': 1e-5,  # Tolerance
-                'maxiter': 1e+7  # Maximum iterations
-            }
+            #method='L-BFGS-B',  # The optimisation algorithm
+            #options={
+            #    'ftol': 1e-5,  # Tolerance
+            #    'maxiter': 1e+7  # Maximum iterations
+            #},
+            #bounds=[(0, 7.91), (0, 8.12)]
         )
 
         prediction = result.x
@@ -324,7 +324,7 @@ class ScanningView(APIView):
             position_dict['Classification'] = self.position_classification
         else:
             if self.position_regression is not None:
-                if len(self.position_regression) == 2:
+                if len(self.position_regression[0]) == 2:
                     position_dict['Regression'] = (self.position_regression[0][0], self.position_regression[0][1])
                 else:
                     position_dict['Regression'] = self.position_regression[0][0]

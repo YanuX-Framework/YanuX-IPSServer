@@ -7,7 +7,7 @@ from . import algorithms
 from .algorithms import *
 from ..snippets import common
 
-dataset = pd.read_csv('datasets/Proximity/dataset_train_university.csv')
+dataset = pd.read_csv('datasets/Proximity/proximity_fct-nova-ed2-p35_-12dBm.csv')
 
 '''
 INITIALIZATION FOR SCANNING PHASE
@@ -35,6 +35,7 @@ def train_dataset(x_train, columns, algorithm):
         estimator = algorithms.initialize_knn_regressor(trainX_data=x_train,
                                                         trainY_data=y_train)
         trained_dataset['KNNR'] = estimator
+    
     elif algorithm == 'KNNC':
         if 'zone' in columns:
             categorical_zone = dataset[['zone']]
@@ -45,14 +46,30 @@ def train_dataset(x_train, columns, algorithm):
             y_train = dataset['labels'].values.reshape(-1, 1)
             estimator = algorithms.initialize_knn_classifier(trainX_data=x_train,
                                                              trainY_data=y_train)
-
             trained_dataset['KNNC'] = estimator
-
+    
+    if algorithm == 'SVR':
+        y_train = pd.DataFrame(dataset['distance'])
+        estimator = algorithms.initialize_svm_regressor(trainX_data=x_train,
+                                                        trainY_data=y_train)
+        trained_dataset['SVR'] = estimator
+    
+    elif algorithm == 'SVC':
+        if 'zone' in columns:
+            categorical_zone = dataset[['zone']]
+            encode_result = common.compute_encoder(categorical_zone, 0)
+            zone_changed = encode_result['labels']
+            dataset['labels'] = zone_changed
+            encoder = encode_result['encoder']
+            y_train = dataset['labels'].values.reshape(-1, 1)
+            estimator = algorithms.initialize_svm_classifier(trainX_data=x_train,
+                                                             trainY_data=y_train)                                       
+            trained_dataset['SVC'] = estimator
 
 def structure_dataset():
     global encoder
     columns = list(dataset.columns)
-    algorithms_to_train = ['KNNR', 'KNNC']
+    algorithms_to_train = ['KNNR', 'KNNC'] #['SVR', 'SVC']
     positions = dataset['coordinate_Y']
     dataset['distance'] = positions
 
@@ -285,3 +302,22 @@ def apply_randomForest_classifier(test_data_df):
         prediction = common.decode(result)
         print("PREDICTION: ", prediction[0])
     return prediction
+
+def apply_svm_classification_scanning(test_dataset):
+    if 'zone' in list(dataset.columns):
+        # Init testing dataset
+        test_combination_features_X = test_dataset[['rssi_Value', 'rolling_mean_rssi']]
+        # Compute Algorithm
+        result = compute_svm_classification(main_estimator=trained_dataset['SVC'],
+                                            testX_data=test_combination_features_X)
+        return encoder.inverse_transform(result)
+    else:
+        return None
+
+def apply_svm_regression_scanning(test_dataset):
+    # Init testing dataset
+    test_combination_features_X = test_dataset[['rssi_Value', 'rolling_mean_rssi']]
+    # Compute Algorithm
+    result = compute_svm_regression(main_estimator=trained_dataset['SVR'],
+                                    testX_data=test_combination_features_X)
+    return result

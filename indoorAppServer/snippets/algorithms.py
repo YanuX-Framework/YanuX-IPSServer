@@ -238,7 +238,43 @@ def compute_LinearRegression(trainX_data=None, trainY_data=None, testX_data=None
     predict_test = main_estimator.predict(testX_data)
     return predict_test
 
+def initialize_svm_classifier(trainX_data, trainY_data, scaler=StandardScaler(),
+                              C_parameter=1.0, kernel_parameter='rbf', gamma_parameter="scale",
+                              class_weigth_parameter=None, decision_function_shape_parameter='ovr'):
+    svm_classifier_estimator = SVC(C=C_parameter, kernel=kernel_parameter, gamma=gamma_parameter,
+                                   class_weight=class_weigth_parameter,
+                                   decision_function_shape=decision_function_shape_parameter, random_state=6)
+    if scaler is not None:
+        # Make pipeline using scaler transformation
+        main_estimator = make_pipeline(scaler, svm_classifier_estimator)
+    else:
+        main_estimator = svm_classifier_estimator
+    # Fit the training data
+    main_estimator.fit(trainX_data, trainY_data)
+    return main_estimator
 
+def compute_svm_classification(main_estimator, testX_data):
+    # Predict the results of the testing data features
+    predict_test = main_estimator.predict(testX_data)
+    return predict_test
+
+def initialize_svm_regressor(trainX_data, trainY_data, scaler=StandardScaler(),
+                             C_parameter=1.0, kernel_parameter='rbf', gamma_parameter="scale", epsilon_value=0.1):
+    # Init the SVM Regressor Estimator
+    svm_regression_estimator = SVR(C=C_parameter, kernel=kernel_parameter, gamma=gamma_parameter, epsilon=epsilon_value)
+    if scaler is not None:
+        # Make pipeline using scaler transformation
+        main_estimator = make_pipeline(scaler, svm_regression_estimator)
+    else:
+        main_estimator = svm_regression_estimator
+    # Fit the training data
+    main_estimator.fit(trainX_data, trainY_data)
+    return main_estimator
+
+def compute_svm_regression(main_estimator, testX_data):
+    # Predict the results of the testing data features
+    predict_test = main_estimator.predict(testX_data)
+    return predict_test
 
 
 '''
