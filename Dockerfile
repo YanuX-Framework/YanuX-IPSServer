@@ -2,7 +2,7 @@ FROM python:3.8
 
 WORKDIR /usr/src/app
 
-RUN apt update && apt install libsnappy-dev
+RUN apt update && apt install -y libsnappy-dev
 
 COPY requirements.txt ./
 RUN python -m pip install -U pip
