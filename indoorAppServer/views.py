@@ -230,6 +230,16 @@ class ScanningView(APIView):
             radio_map=matching_radio_map['dataset'],
             access_points=self.access_points_ml,
             beacons=self.beacons_ml_fingerprinting)
+        # TODO self.position_regression = fingerprintPositioning.apply_knn_regressor_scanning(
+        #     estimator_options=trained_radio_maps[matching_radio_map['dataset']],
+        #     radio_map=matching_radio_map['dataset'],
+        #     access_points=self.access_points_ml,
+        #     beacons=self.beacons_ml_fingerprinting)
+        # TODO self.position_regression = fingerprintPositioning.apply_svm_regressor_scanning(
+        #     estimator_options=trained_radio_maps[matching_radio_map['dataset']],
+        #     radio_map=matching_radio_map['dataset'],
+        #     access_points=self.access_points_ml,
+        #     beacons=self.beacons_ml_fingerprinting)
         # Apply RF to Classification
         if radio_map_is_classifier:
             self.position_classification = fingerprintPositioning.apply_rf_classification_scanning(
@@ -237,6 +247,16 @@ class ScanningView(APIView):
                 radio_map=matching_radio_map['dataset'],
                 access_points=self.access_points_ml,
                 beacons=self.beacons_ml_fingerprinting)
+            #TODO self.position_classification = fingerprintPositioning.apply_knn_classification_scanning(
+            #     estimator_options=trained_radio_maps[matching_radio_map['dataset']],
+            #     radio_map=matching_radio_map['dataset'],
+            #     access_points=self.access_points_ml,
+            #     beacons=self.beacons_ml_fingerprinting)
+            # TODO self.position_classification = fingerprintPositioning.apply_svm_classification_scanning(
+            #     estimator_options=trained_radio_maps[matching_radio_map['dataset']],
+            #     radio_map=matching_radio_map['dataset'],
+            #     access_points=self.access_points_ml,
+            #     beacons=self.beacons_ml_fingerprinting)
 
     def apply_proximity(self, target_beacon):
         sample = {}
@@ -249,6 +269,8 @@ class ScanningView(APIView):
 
         # Apply KNN to Regression
         self.position_regression = proximityPositioning.apply_knn_regression_scanning(test_df)#.apply_svm_regression_scanning(test_df)#
+
+        print('Distance Prediction to the beacon: ' + str(self.position_regression))
         # Apply KNN to Classification
         self.position_classification = proximityPositioning.apply_knn_classification_scanning(test_df)#.apply_svm_classification_scanning(test_df)
 
@@ -399,10 +421,10 @@ EXPERIMENT CLASSES FOR TRILATERATION/PROXIMITY/FINGERPRINTING
 class ProximityDistanceView(APIView):
     def post(self, request, formate=None):
         df = csvHandler.compute_csv(request)
-        if path.exists(".\dataset_test_university.csv"):
-            df.to_csv(r'.\dataset_test_university.csv', mode='a', index=False, header=False)
+        if path.exists(".\dataset_test_home_2seconds.csv"):
+            df.to_csv(r'.\dataset_test_home_2seconds.csv', mode='a', index=False, header=False)
         else:
-            df.to_csv(r'.\dataset_test_university.csv', index=False, header=True)
+            df.to_csv(r'.\dataset_test_home_2seconds.csv', index=False, header=True)
         return Response(status=status.HTTP_200_OK)
 
 

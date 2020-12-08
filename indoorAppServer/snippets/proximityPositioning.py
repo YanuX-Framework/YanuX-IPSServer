@@ -7,7 +7,7 @@ from . import algorithms
 from .algorithms import *
 from ..snippets import common
 
-dataset = pd.read_csv('datasets/Proximity/proximity_fct-nova-ed2-p35_-12dBm.csv')
+dataset = pd.read_csv('datasets/Proximity/dataset_test_home_2seconds.csv')
 
 '''
 INITIALIZATION FOR SCANNING PHASE

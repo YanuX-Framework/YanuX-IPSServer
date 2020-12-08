@@ -36,15 +36,22 @@ def get_labels(radio_map):
 
 
 def train_algorithms(x_train, dataset, radio_map, trained_radio_maps, columns):
-    algorithms_to_train = ['RFR', 'RFC']
+    algorithms_to_train = ['RFR', 'RFC'] #TODO CHANGE TO SVR / SVC / KNNR / KNNC
     trained_radio_maps[radio_map] = dict()
     for algorithm in algorithms_to_train:
-        if algorithm == 'RFR':
+        if algorithm == 'RFR': #TODO SVR / KNNR
             y_train = dataset.iloc[:, 1:3]
             estimator = algorithms.initialize_rf_regressor(trainX_data=x_train,
                                                            trainY_data=y_train)
             trained_radio_maps[radio_map]['RFR'] = estimator
-        elif algorithm == 'RFC':
+            #TODO
+            # estimator = algorithms.initialize_svr(trainX_data=x_train,
+            #                                                trainY_data=y_train)
+            # trained_radio_maps[radio_map]['SVR'] = estimator
+            # estimator = algorithms.initialize_knnr(trainX_data=x_train,
+            #                                                trainY_data=y_train)
+            # trained_radio_maps[radio_map]['KNNR'] = estimator
+        elif algorithm == 'RFC': # SVC / KNNC
             if 'zone' in columns:
                 categorical_zone = dataset[['zone']]
                 encoder = common.compute_encoder(categorical_zone, 0)
@@ -56,6 +63,13 @@ def train_algorithms(x_train, dataset, radio_map, trained_radio_maps, columns):
                                                                 trainY_data=y_train)
 
                 trained_radio_maps[radio_map]['RFC'] = estimator
+                #TODO
+                # estimator = algorithms.initialize_svc(trainX_data=x_train,
+                #                                                trainY_data=y_train)
+                # trained_radio_maps[radio_map]['SVC'] = estimator
+                # estimator = algorithms.initialize_knnc(trainX_data=x_train,
+                #                                                trainY_data=y_train)
+                # trained_radio_maps[radio_map]['KNNC'] = estimator
 
 
 def train_each_radio_map():
