@@ -76,6 +76,141 @@ def apply_rf_classification_scanning(estimator_options, radio_map, access_points
     encoder = radiomap.get_labels(radio_map)
     return encoder.inverse_transform(result)
 
+#KNN
+
+def apply_knn_regressor_scanning(estimator_options, radio_map, access_points, beacons):
+    x_train = radiomap.get_x_train(radio_map)
+    # Init testing dataset by checking which access points to fill
+    sample_list = list()
+    for column in x_train:
+        if column in access_points:
+            sample_list.append(access_points[column])
+        elif column in beacons:
+            sample_list.append(beacons[column])
+        else:
+            sample_list.append(0)
+    sample_2dlist = list()
+    sample_2dlist.append(sample_list)
+    X_test_list = np.array(sample_2dlist)
+    X_test = pd.DataFrame(data=X_test_list, columns=x_train.columns)
+    first_beacon_index_t2 = -1
+    for ap in X_test.iloc[:, 0:]:
+        if not ap.islower():
+            first_beacon_index_t2 = list(X_test).index(ap)
+            break
+    X_test = common.replace_features_nan(X_test, 0)
+    common.compute_data_cleaning_with_global_minimum(X_test, first_beacon_index_t2, -1)
+    access_points_tst = X_test.iloc[:, 0:first_beacon_index_t2]
+    beacons_tst = X_test.iloc[:, first_beacon_index_t2:]
+    if access_points_tst.isnull().values.any():
+        common.replace_features_minimum(X_test, 0)
+    if beacons_tst.isnull().values.any():
+        common.replace_features_minimum(X_test, 0)
+    # Compute Algorithm
+    result = compute_knn_regression(main_estimator=estimator_options['KNNR'], testX_data=X_test)
+    return result
+
+
+def apply_knn_classification_scanning(estimator_options, radio_map, access_points, beacons):
+    x_train = radiomap.get_x_train(radio_map)
+    # Init testing dataset by checking which access points to fill
+    sample_list = list()
+    for column in x_train:
+        if column in access_points:
+            sample_list.append(access_points[column])
+        elif column in beacons:
+            sample_list.append(beacons[column])
+        else:
+            sample_list.append(0)
+    sample_2dlist = list()
+    sample_2dlist.append(sample_list)
+    X_test_list = np.array(sample_2dlist)
+    X_test = pd.DataFrame(data=X_test_list, columns=x_train.columns)
+    first_beacon_index_t2 = -1
+    for ap in X_test.iloc[:, 0:]:
+        if not ap.islower():
+            first_beacon_index_t2 = list(X_test).index(ap)
+            break
+    X_test = common.replace_features_nan(X_test, 0)
+    common.compute_data_cleaning_with_global_minimum(X_test, first_beacon_index_t2, zone_index=-1)
+    access_points_tst = X_test.iloc[:, 0:first_beacon_index_t2]
+    beacons_tst = X_test.iloc[:, first_beacon_index_t2:]
+    if access_points_tst.isnull().values.any():
+        common.replace_features_minimum(X_test, 0)
+    if beacons_tst.isnull().values.any():
+        common.replace_features_minimum(X_test, 0)
+    # Compute Algorithm
+    result = compute_knn_classification(main_estimator=estimator_options['KNNC'], testX_data=X_test)
+    encoder = radiomap.get_labels(radio_map)
+    return encoder.inverse_transform(result)
+
+#SVM
+
+def apply_svm_regressor_scanning(estimator_options, radio_map, access_points, beacons):
+    x_train = radiomap.get_x_train(radio_map)
+    # Init testing dataset by checking which access points to fill
+    sample_list = list()
+    for column in x_train:
+        if column in access_points:
+            sample_list.append(access_points[column])
+        elif column in beacons:
+            sample_list.append(beacons[column])
+        else:
+            sample_list.append(0)
+    sample_2dlist = list()
+    sample_2dlist.append(sample_list)
+    X_test_list = np.array(sample_2dlist)
+    X_test = pd.DataFrame(data=X_test_list, columns=x_train.columns)
+    first_beacon_index_t2 = -1
+    for ap in X_test.iloc[:, 0:]:
+        if not ap.islower():
+            first_beacon_index_t2 = list(X_test).index(ap)
+            break
+    X_test = common.replace_features_nan(X_test, 0)
+    common.compute_data_cleaning_with_global_minimum(X_test, first_beacon_index_t2, -1)
+    access_points_tst = X_test.iloc[:, 0:first_beacon_index_t2]
+    beacons_tst = X_test.iloc[:, first_beacon_index_t2:]
+    if access_points_tst.isnull().values.any():
+        common.replace_features_minimum(X_test, 0)
+    if beacons_tst.isnull().values.any():
+        common.replace_features_minimum(X_test, 0)
+    # Compute Algorithm
+    result = compute_svm_regression(main_estimator=estimator_options['SVR'], testX_data=X_test)
+    return result
+
+
+def apply_svm_classification_scanning(estimator_options, radio_map, access_points, beacons):
+    x_train = radiomap.get_x_train(radio_map)
+    # Init testing dataset by checking which access points to fill
+    sample_list = list()
+    for column in x_train:
+        if column in access_points:
+            sample_list.append(access_points[column])
+        elif column in beacons:
+            sample_list.append(beacons[column])
+        else:
+            sample_list.append(0)
+    sample_2dlist = list()
+    sample_2dlist.append(sample_list)
+    X_test_list = np.array(sample_2dlist)
+    X_test = pd.DataFrame(data=X_test_list, columns=x_train.columns)
+    first_beacon_index_t2 = -1
+    for ap in X_test.iloc[:, 0:]:
+        if not ap.islower():
+            first_beacon_index_t2 = list(X_test).index(ap)
+            break
+    X_test = common.replace_features_nan(X_test, 0)
+    common.compute_data_cleaning_with_global_minimum(X_test, first_beacon_index_t2, zone_index=-1)
+    access_points_tst = X_test.iloc[:, 0:first_beacon_index_t2]
+    beacons_tst = X_test.iloc[:, first_beacon_index_t2:]
+    if access_points_tst.isnull().values.any():
+        common.replace_features_minimum(X_test, 0)
+    if beacons_tst.isnull().values.any():
+        common.replace_features_minimum(X_test, 0)
+    # Compute Algorithm
+    result = compute_svm_classification(main_estimator=estimator_options['SVC'], testX_data=X_test)
+    encoder = radiomap.get_labels(radio_map)
+    return encoder.inverse_transform(result)
 
 '''
 EXPERIMENTAL PHASE HANDLERS

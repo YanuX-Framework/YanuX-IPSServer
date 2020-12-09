@@ -70,7 +70,91 @@ def compute_rf_classification(main_estimator, testX_data):
 
     return predict_test
 
+#KNN
 
+
+def initialize_knnr(trainX_data, trainY_data, scaler=StandardScaler(),
+                             n_neighbors=5,
+                             weights='distance', algorithm='auto', metric='manhattan', n_jobs=-1):
+    # Init the KNN Regressor Estimator
+    knn_regression_estimator = KNeighborsRegressor(n_neighbors=n_neighbors, weights=weights, algorithm=algorithm,
+                                                   metric=metric, n_jobs=n_jobs)
+    if scaler is not None:
+        # Make pipeline using scaler transformation
+        main_estimator = make_pipeline(scaler, knn_regression_estimator)
+    else:
+        main_estimator = knn_regression_estimator
+    # Fit the training data
+    main_estimator.fit(trainX_data, trainY_data)
+    return main_estimator
+
+
+
+def initialize_knnc(trainX_data, trainY_data, scaler=StandardScaler(),
+                              n_neighbors=3,
+                              weights='distance', algorithm='auto', metric='manhattan', n_jobs=-1):
+    knn_classifier_estimator = KNeighborsClassifier(n_neighbors=n_neighbors, weights=weights, algorithm=algorithm,
+                                                    metric=metric, n_jobs=n_jobs)
+
+    if scaler is not None:
+        # Make pipeline using scaler transformation
+        main_estimator = make_pipeline(scaler, knn_classifier_estimator)
+    else:
+        main_estimator = knn_classifier_estimator
+    # Fit the training data
+    main_estimator.fit(trainX_data, trainY_data)
+
+    return main_estimator
+
+
+#SVM
+
+def initialize_svr(trainX_data=None, trainY_data=None, testX_data=None, scaler=StandardScaler()
+                                , C_parameter=10.0, kernel_parameter='rbf', gamma_parameter="scale", epsilon_value=0.1):
+    # Init the SVM
+    svr_estimator = SVR(C=C_parameter, kernel=kernel_parameter, gamma=gamma_parameter, epsilon=epsilon_value)
+
+    if scaler is not None:
+        # Make pipeline using scaler transformation
+        main_estimator = make_pipeline(scaler, svr_estimator)
+    else:
+        main_estimator = svr_estimator
+    # Fit the training data
+    main_estimator.fit(trainX_data, trainY_data)
+    return main_estimator
+
+
+def initialize_svc(trainX_data=None, trainY_data=None, testX_data=None, scaler=StandardScaler()
+                                    , C_parameter=1000.0, kernel_parameter='rbf', gamma_parameter="scale",
+                                    class_weigth_parameter="balanced", decision_function_shape_parameter='ovo'):
+    # Init the SVM
+    svm_classifier_estimator = SVC(C=C_parameter, kernel=kernel_parameter, gamma=gamma_parameter,
+                                   class_weight=class_weigth_parameter,
+                                   decision_function_shape=decision_function_shape_parameter, random_state=6)
+
+    if scaler is not None:
+        # Make pipeline using scaler transformation
+        main_estimator = make_pipeline(scaler, svm_classifier_estimator)
+    else:
+        main_estimator = svm_classifier_estimator
+    # Fit the training data
+    main_estimator.fit(trainX_data, trainY_data)
+
+    return main_estimator
+
+
+def compute_svm_regression(main_estimator, testX_data):
+    # Predict the results of the testing data features
+    predict_test = main_estimator.predict(testX_data)
+
+    return predict_test
+
+
+def compute_svm_classification(main_estimator, testX_data):
+    # Predict the results of the testing data features
+    predict_test = main_estimator.predict(testX_data)
+
+    return predict_test
 '''
 PROXIMITY MAIN ALGORITHM
 '''
