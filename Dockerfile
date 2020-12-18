@@ -7,7 +7,6 @@ RUN apt update && apt install -y libsnappy-dev
 COPY . .
 RUN python -m pip install -U pip && \
     pip install --no-cache-dir -r requirements.txt && \
-    pip install --no-cache-dir -r requirements-extras.txt && \
     chmod +x start.sh && \
     mkdir -p save
 
