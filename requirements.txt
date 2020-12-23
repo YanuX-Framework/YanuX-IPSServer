@@ -1,5 +1,5 @@
-crossbar==20.12.2
-autobahn==20.12.2
+crossbar==20.12.3
+autobahn==20.12.3
 Django==3.1.4
 django-on-heroku==1.1.2
 djangorestframework==3.12.2
@@ -11,6 +11,6 @@ numpy==1.19.4
 pandas==1.1.5
 requests==2.25.1
 scikit-fuzzy==0.4.2
-scikit-learn==0.23.2
+scikit-learn==0.24.0
 scipy==1.5.4
 Twisted==20.3.0
