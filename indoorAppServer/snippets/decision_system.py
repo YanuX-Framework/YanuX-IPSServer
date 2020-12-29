@@ -29,12 +29,12 @@ def create_fuzzy_system():
     technique['Fingerprinting'] = fuzz.gaussmf(technique.universe, 5, 0.1)
     technique['None'] = fuzz.gaussmf(technique.universe, 7, 0.1)
 
-    # MatPlotLib visualization of the membership functions
-    number_beacons['Medium'].view()
-    matching_aps.view()
-    matching_beacons.view()
-    beacons_locations.view()
-    technique.view()
+    # # MatPlotLib visualization of the membership functions
+    # number_beacons['Medium'].view()
+    # matching_aps.view()
+    # matching_beacons.view()
+    # beacons_locations.view()
+    # technique.view()
 
     # Rule Base Definition
     rule1 = ctrl.Rule(number_beacons['None'] & matching_aps['Enough'] & matching_beacons['Not Enough'],
@@ -67,7 +67,7 @@ def create_fuzzy_system():
     rule11 = ctrl.Rule(
         number_beacons['None'] & matching_aps['Not Enough'] & matching_beacons['Not Enough'], technique['None'])
 
-    rule1.view()
+    # rule1.view()
 
     # Control System Creation
     position_technique_ctrl = ctrl.ControlSystem([rule1, rule2, rule3,
@@ -89,7 +89,7 @@ def compute_fuzzy_decision(position_technique_ctrl, technique, number_beacons, m
 
     output_value = simulation.output['technique']
 
-    technique.view(sim=simulation)
+    # technique.view(sim=simulation)
     result = ''
 
     if round(output_value, 1) == 1.0:

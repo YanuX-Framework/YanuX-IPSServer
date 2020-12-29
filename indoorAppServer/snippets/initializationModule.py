@@ -35,6 +35,6 @@ def train_existent_radio_maps():
     else:
         print('Training radio maps...')
         trained_rm =  radiomap.train_each_radio_map()
-        print('Radio maps successfully trained.', trained_rm)
+        print('Radio maps successfully trained.')
         joblib.dump(trained_rm, save_file)
         return trained_rm

@@ -61,3 +61,5 @@ venv.bak/
 .crossbar/key.pub
 .crossbar/key.priv
 save/
+
+.vscode/
