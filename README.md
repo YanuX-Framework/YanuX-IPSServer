@@ -3,7 +3,7 @@ This is part of the [__YanuX Framework__](https://yanux-framework.github.io/). I
 
 It is built in [Python](https://www.python.org/) and uses [Django](https://www.djangoproject.com/) and the [Django REST Framework](https://www.django-rest-framework.org/) to provide a __REST API__ that the __Indoor Positioning Clients__ can use to submit scanning information.
 
-Based on the information received by the clients it can then decide which positioning methods and techniques should be used to determine the absolute and/or relative position of the devices running those clients. 
+The server can then decide which positioning methods and techniques should be used to determine the absolute and/or relative position of the devices based on the information received from the clients running on them. 
 
 The decision engine is built using __fuzzy logic__ using [__scikit-fuzzy__](https://github.com/scikit-fuzzy/scikit-fuzzy). Most of the employed data analysis and machine learning algorithms come from [__scikit-learn__](https://scikit-learn.org/).
 
