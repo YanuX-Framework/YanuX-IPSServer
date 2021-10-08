@@ -15,7 +15,7 @@ FINGERPRINTING MAIN ALGORITHM
 
 
 def initialize_rf_regressor(trainX_data, trainY_data, n_estimators_parameter=2000,
-                            criterion_parameter='mse',
+                            criterion_parameter='squared_error',
                             max_depth_parameter=None, min_samples_split_parameter=2,
                             min_samples_leaf_parameter=1, max_features_parameter='auto',
                             bootstrap_parameter=True, random_state_parameter=42):
