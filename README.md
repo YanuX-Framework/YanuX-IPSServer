@@ -11,6 +11,8 @@ A [__WAMP__](https://wamp-proto.org/) Router ([__Crossbar.io__](https://crossbar
 
 ### TO DO:
 - Provide additional documentation.
+- It is probably better to separate the **Django-based API** from the **WAMP Router** in the future for better maintainability.
+- Migrate to a newer `socket.io-client` package once supported by **Feathers**.
 
 ## License
 This work is licensed under [__GNU Affero General Public License Version 3__](LICENSE)
