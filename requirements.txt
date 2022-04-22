@@ -1,6 +1,6 @@
 crossbar==21.3.1
 autobahn==21.11.1
-Django==4.0.1
+Django==4.0.4
 django-on-heroku==1.1.2
 djangorestframework==3.13.1
 gunicorn==20.1.0
